@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('movies',function(){
-  return json_encode(App\Movies::all());
+ return response()->json(App\Movies::all());
 });
 Route::get('movies/{ID}',function($ID){
   return response()->json (App\Movies::where('ID',$ID)->get());
@@ -80,6 +80,36 @@ Route::get('description/{DESCRIPTION}',function($DISCRIPTION){
 Route::get('imagepath/{IMAGEPATH}',function($IMAGEPATH){
   return response()->json (App\Movies::where('IMAGEPATH',$IMAGEPATH)->get());
 });
+
+Route::get('users/{id}',function($id){
+  return response()->json (App\User::where('id',$id)->get());
+});
+Route::get('name/{name}',function($name){
+  return response()->json (App\User::where('name',$name)->get());
+});
+Route::get('email/{email}',function($email){
+  return response()->json (App\User::where('email',$email)->get());
+});
+Route::get('users',function(){
+  return response()->json(App\User::all());
+});
+/* ROute::get('api/movies/{ID}',,function ($ID = null){
+   if ($ID ==null) {
+     $var1=App\Movies::all();}
+     else {
+       $var1=App\Movies::find($ID);
+
+     }
+     return Response::json(array(
+       'error'=> false,
+       'var1'=> $var1,
+       'status_code'=>200
+     ));
+
+ }]);*/
+
+
+
 
 
 
