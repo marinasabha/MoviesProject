@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Http\Response;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('home',function(){
+  return response ('Hello World',200)->header('Content-type','json');
+});
 Route::get('movies',function(){
  return response()->json(App\Movies::all());
 });
