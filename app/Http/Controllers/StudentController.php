@@ -13,9 +13,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-         $students = Student::all()->toArray();
-        return view('student.index', compact('students'));
-    
+         $users = Movie::all()->toArray();
+        return view('user.index', compact('users'));
+
     }
 
     /**
@@ -25,7 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        return view('movie.create');
     }
 
     /**
@@ -37,17 +37,17 @@ class StudentController extends Controller
     public function store(Request $request)
     {
           $this->validate($request, [
-            'first_name'    =>  'required',
-            'last_name'     =>  'required'
+            'name'    =>  'required',
+            'email'     =>  'required'
         ]);
-        $student = new Student([
-            'first_name'    =>  $request->get('first_name'),
-            'last_name'     =>  $request->get('last_name')
+        $user = new User([
+            'name'    =>  $request->get('name'),
+            'email'     =>  $request->get('email')
         ]);
-        $student->save();
-        return redirect()->route('student.create')->with('success', 'Data Added');
+        $user->save();
+        return redirect()->route('movies.create')->with('success', 'Data Added');
     }
-    }
+
 
     /**
      * Display the specified resource.
@@ -68,9 +68,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::find($id);
-        return view('student.edit', compact('student', 'id'));
-    
+        $movies = Movie::find($id);
+        return view('movie.edit', compact('movie', 'id'));
+
     }
 
     /**
@@ -93,7 +93,7 @@ class StudentController extends Controller
         return redirect()->route('student.index')->with('success', 'Data Updated');
     }
 
-    }
+
 
     /**
      * Remove the specified resource from storage.

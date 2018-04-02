@@ -11,8 +11,17 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
+    $user = Auth::user();
+    if ($user == null) {
+      return redirect()->route('login');
+    }
     return view('test');
+
+});
+
+Route::get('/', function () {
+    return view('welcome');
 
 });
 Route::get('/master',function (){

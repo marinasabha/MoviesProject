@@ -5,7 +5,7 @@
 <div class="row">
  <div class="col-md-12">
   <br />
-  <h3 align="center">Student Data</h3>
+  <h3 align="center">users Data</h3>
   <br />
   @if($message = Session::get('success'))
   <div class="alert alert-success">
@@ -13,7 +13,7 @@
   </div>
   @endif
   <div align="right">
-   <a href="{{route('student.create')}}" class="btn btn-primary">Add</a>
+   <a href="{{route('user.create')}}" class="btn btn-primary">Add</a>
    <br />
    <br />
   </div>
@@ -24,10 +24,10 @@
     <th>Edit</th>
     <th>Delete</th>
    </tr>
-   @foreach($students as $row)
+   @foreach($users as $row)
    <tr>
-    <td>{{$row['first_name']}}</td>
-    <td>{{$row['last_name']}}</td>
+    <td>{{$row['name']}}</td>
+    <td>{{$row['email']}}</td>
     <td><a href="{{action('StudentController@edit', $row['id'])}}" class="btn btn-warning">Edit</a></td>
     <td> <form method="post" class="delete_form" action="{{action('StudentController@destroy', $row['id'])}}">
       {{csrf_field()}}
@@ -55,5 +55,3 @@ $(document).ready(function(){
 });
 </script>
 @endsection
- 
-
