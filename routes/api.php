@@ -18,7 +18,7 @@ Route::get('movies',function(){
    return response()->json([
      'count'=>$count,
     'status'=>'success',
-    'data'=>$movies,
+    'data'=>$movies
 
 
   ]);
