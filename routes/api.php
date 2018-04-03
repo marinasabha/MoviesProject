@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,6 +25,12 @@ Route::get('movies',function(){
   ]);
 
 });
+/* Route::get('/marina',function()
+   {
+       $users = DB::table('users')->get();
+
+       return $users; }); */
+
 Route::post('/inesertRate','MovieController@insertRating');
 
 Route::get('movies/{ID}',function($ID){
