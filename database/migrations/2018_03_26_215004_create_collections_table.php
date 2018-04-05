@@ -29,6 +29,9 @@ class CreateCollectionsTable extends Migration
             $table->boolean('WATCHED');
             $table->timestamps();
         });
+        Schema::create('collections', function (Blueprint $table){
+          $table->json('recomender');
+        });
     }
 
     /**

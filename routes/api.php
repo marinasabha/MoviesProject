@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,20 +22,35 @@ Route::get('movies',function(){
     'data'=>$movies
 
 
-  ]);
+  ]); /*DB::table('users')
+            ->where('id', 1)
+            ->update(['votes' => 1]);*/
 
-});
+})->middleware('auth:api');
+Route::get('/recomendation',function(){
+  $recomender = DB::table('collections')->select('recomender')
+  ->where('user_id', Auth::user()->id)
+  ->toArray()
+  ->get();
+  $rec = DB::table('movies')
+                    ->whereIn('ID',$recomender)
+                    ->get();
+                    return response()->json([
+                      'data'=>$rec
+                    ]);
+
+})->middleware('auth:api');
 /* Route::get('/marina',function()
    {
        $users = DB::table('users')->get();
 
        return $users; }); */
 
-Route::post('/inesertRate','MovieController@insertRating');
+Route::post('/inesertRate','MovieController@insertRating')->middleware('auth:api');
 
 Route::get('movies/{ID}',function($ID){
   return response()->json (App\Movies::where('ID',$ID)->get());
-});
+})->middleware('auth:api');
 
 Route::get('movies/director/{DIRECTOR}',function($DIRECTOR){
   return response()->json (App\Movies::where('DIRECTOR',$DIRECTOR)->get());
