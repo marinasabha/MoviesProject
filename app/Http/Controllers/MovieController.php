@@ -40,5 +40,5 @@ class MovieController extends Controller
 
 
       /*  return View::make("your view here");*/
-    
+
 }

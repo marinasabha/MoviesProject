@@ -25,6 +25,14 @@ Route::get('movies',function(){
   ]);
 })->middleware('auth:api');
 
+Route::get('/recomender1',function(){
+  $recomender = DB::table('recomendations')->select('RECOMENDER')
+  ->where('user_id', Auth::user()->id);
+  return response()->json([
+    'data'=>$recomender
+  ]);
+})->middleware('auth:api');
+
   /*DB::table('users')
             ->where('id', 1)
             ->update(['votes' => 1]);*/
@@ -71,6 +79,31 @@ Route::get('/findmovie/{findmovie}',function($findmovie){
       'data'=>$movie
       ]);
 });
+Route::get('movies/order/year',function(){
+  $order = DB::table('movies')
+                ->orderBy('YEAR', 'desc')
+                ->get();
+                return response()->json([
+                  'data'=>$order
+                ]);
+});
+Route::get('movies/order/duration',function(){
+  $order = DB::table('movies')
+                ->orderBy('DURATION')
+                ->get();
+                return response()->json([
+                  'data'=>$order
+                ]);
+              });
+
+            Route::get('movies/order/imdb',function(){
+              $order = DB::table('movies')
+                              ->orderBy('IMDB_SCORE','desc')
+                              ->get();
+                              return response()->json([
+                                'data'=>$order
+                              ]);
+                            });
 Route::get('movies/{ID}',function($ID){
   return response()->json (App\Movies::where('ID',$ID)->get());
 })->middleware('auth:api');
@@ -78,7 +111,9 @@ Route::get('movies/{ID}',function($ID){
 Route::get('movies/director/{DIRECTOR}',function($DIRECTOR){
   return response()->json (App\Movies::where('DIRECTOR',$DIRECTOR)->get());
 });
-
+Route::get('/recomendera',function(){
+  return response()->json(App\Recomendation::all());
+});
 Route::get('movies/actor_2/{ACTOR_2}',function($ACTOR_2){
   return response()->json (App\Movies::where('ACTOR_2',$ACTOR_2)->get());
 });
