@@ -19,6 +19,10 @@ Route::get('/test', function () {
     return view('test');
 
 });
+Route::get('/kenda', function () {
+    return view('student.kenda');
+
+});
 
 Route::get('/', function () {
     return view('welcome');

@@ -22,16 +22,16 @@ Route::get('movies',function(){
     'data'=>$movies
 
 
-  ]); /*DB::table('users')
+  ]);
+})->middleware('auth:api');
+
+  /*DB::table('users')
             ->where('id', 1)
             ->update(['votes' => 1]);*/
 
-})->middleware('auth:api');
-Route::get('/recomendation',function(){
-  $recomender = DB::table('collections')->select('recomender')
-  ->where('user_id', Auth::user()->id)
-  ->toArray()
-  ->get();
+Route::get('/recomender',function(){
+  $recomender = DB::table('recomendations')->select('RECOMENDER')
+  ->where('user_id', Auth::user()->id);
   $rec = DB::table('movies')
                     ->whereIn('ID',$recomender)
                     ->get();
@@ -40,14 +40,37 @@ Route::get('/recomendation',function(){
                     ]);
 
 })->middleware('auth:api');
+
+
+
+
+
+  /*  return View::make("your view here");*/
+
+
 /* Route::get('/marina',function()
    {
        $users = DB::table('users')->get();
 
        return $users; }); */
-
-Route::post('/inesertRate','MovieController@insertRating')->middleware('auth:api');
-
+Route::post('/insertRec','MovieController@insertRecomendation')->middleware('auth:api');
+Route::post('/insertRate','MovieController@insertRating')->middleware('auth:api');
+Route::get('/findmovie/{findmovie}',function($findmovie){
+      $movie = DB::table('movies')
+      ->where('DIRECTOR','LIKE',"$findmovie%")
+      ->orWhere('ACTOR_2', 'LIKE', "%$findmovie%")
+      ->orWhere('DURATION','LIKE',"$findmovie%")
+      ->orWhere('ACTOR_1', 'LIKE', "%$findmovie%")
+      ->orWhere('TITLE', 'LIKE', "%$findmovie%")
+      ->orWhere('GENERS', 'LIKE', "%$findmovie%")
+      ->orWhere('ACTOR_3', 'LIKE', "%$findmovie%")
+      ->orWhere('LANGUAGE', 'LIKE',"%$findmovie%")
+      ->orWhere('YEAR', 'LIKE',"%$findmovie%")
+      ->get();
+      return response()->json([
+      'data'=>$movie
+      ]);
+});
 Route::get('movies/{ID}',function($ID){
   return response()->json (App\Movies::where('ID',$ID)->get());
 })->middleware('auth:api');
