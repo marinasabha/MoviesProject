@@ -27,9 +27,9 @@ Route::get('movies',function(){
 
 Route::get('/recomender1',function(){
   $recomender = DB::table('recomendations')->select('RECOMENDER')
-  ->where('user_id', Auth::user()->id);
-  return response()->json([
-    'data'=>$recomender
+  ->where('user_id', Auth::user()->id)->get();
+  return  response()->json([
+    'data'=> $recomender
   ]);
 })->middleware('auth:api');
 
@@ -39,7 +39,9 @@ Route::get('/recomender1',function(){
 
 Route::get('/recomender',function(){
   $recomender = DB::table('recomendations')->select('RECOMENDER')
-  ->where('user_id', Auth::user()->id);
+  ->where(
+              ['user_id'=>Auth::user()->id
+               ])->get();
   $rec = DB::table('movies')
                     ->whereIn('ID',$recomender)
                     ->get();
