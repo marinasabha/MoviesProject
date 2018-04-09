@@ -26,7 +26,7 @@ Route::get('/kenda', function () {
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+});
 
 
 Route::get('/master',function (){
