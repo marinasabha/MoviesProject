@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use App\Movies;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +32,7 @@ Route::get('movies/geners/{GENERS}',function($GENERS){
                           ]);
 });
 Route::get('movies/order/{orderBy}',function($orderBy){
+/* if ($orderBy == YEAR) or ($orderBy ==)*/
   $order = DB::table('movies')
                 ->orderBy($orderBy,'desc')
                 ->get();
@@ -78,13 +80,10 @@ Route::get('/recomender',function(){
        return $users; }); */
 Route::post('/insertRec','MovieController@insertRecomendation')->middleware('auth:api');
 Route::post('/insertRate','MovieController@insertRating')->middleware('auth:api');
-Route::get('/findmovie/{findmovie}',function($findmovie){
+Route::get('/search',function(Request $request){
+      $query = $request->input("q");
       $movie = DB::table('movies')
-      ->where('TITLE', 'LIKE', "%$findmovie%")
-    /*  ->orWhere('GENERS', 'LIKE', "%$findmovie%")
-      ->orWhere('ACTOR_3', 'LIKE', "%$findmovie%")
-      ->orWhere('LANGUAGE', 'LIKE',"%$findmovie%")
-      ->orWhere('YEAR', 'LIKE',"%$findmovie%") */
+      ->where('TITLE', 'LIKE', "%$query%")
       ->get();
       return response()->json([
       'data'=>$movie
