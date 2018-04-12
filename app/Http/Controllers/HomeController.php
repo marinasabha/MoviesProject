@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 
 class HomeController extends Controller
-{   use Illuminate\Support\Facades\DB;
+{  
     /**
      * Create a new controller instance.
      *

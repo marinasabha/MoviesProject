@@ -12,6 +12,34 @@ use Response;
 class MovieController extends Controller
 
 {
+  public function register(Request $request){
+  $data=DB::table('users')->where(
+    ['email'=>$request->email])->get();
+     if(count($data)==0){
+       $user = new User();
+       $user->name=$request->input("name");
+       $user->password=$request->input("password");
+       $user->email=$request->input("email");
+       $user->save();
+     return response()->json([
+       'status'=>'success',
+       'data'=>$user,
+
+     ]);
+   }
+   else {
+     return response()->json([
+     'status'=>' failed',
+     'data'=>'User already exists',
+
+   ]);
+}
+   }
+
+
+
+
+
  public function insertRating(Request $request){
  $collection = new Collection ();
  $collection->user_id = Auth::user()->id;

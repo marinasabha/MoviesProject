@@ -14,60 +14,154 @@ use App\Movies;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('movies',function(){
-  $movies = App\Movies::all();
-  $count = count($movies);
-   return response()->json([
-     'count'=>$count,
-    'status'=>'success',
-    'data'=>$movies
 
-
-  ]);
-})->middleware('auth:api');
-Route::get('movies/geners/{GENERS}',function($GENERS){
-  $movies= App\Movies::where('GENERS',$GENERS)->get();
-  return response()->json (['status'=>'success',
-                            'data'=>$movies
-                          ]);
+Route::get('/search',function(Request $request){
+      $query = $request->input("q");
+      $movie = DB::table('movies')->select('TITLE', 'YEAR')
+      ->where('TITLE', 'LIKE', "%$query%")
+      ->get();
+      return response()->json([
+      'data'=>$movie
+      ]);
 });
-Route::get('movies/order/{orderBy}',function($orderBy){
-/* if ($orderBy == YEAR) or ($orderBy ==)*/
-  $order = DB::table('movies')
-                ->orderBy($orderBy,'desc')
-                ->get();
+
+Route::get('/orderby',function(Request $request){
+    $query = $request->input("t");
+    $query1 = $request->input("r");
+    $query2 = $request->input("g");
+   if($query1 <> '-1')
+   {
+     if ($query == 'YEAR'){
+
+  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+   ->where('GENERS','LIKE',"%$query2%")
+   ->where('IMDB_SCORE',$query1)
+   ->orderBy('YEAR','desc')
+   ->Paginate(20);
+ }
+
+if ($query == 'Alphabetical'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+               ->where('GENERS','LIKE',"%$query2%")
+               ->where('IMDB_SCORE',$query1)
+                ->orderBy('TITLE','asc')
+              ->Paginate(20);
+}
+
+  if ($query == 'Oldest'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+                ->where('GENERS','LIKE',"%$query2%")
+                ->where('IMDB_SCORE',$query1)
+                ->orderBy('created_at','asc')
+                ->Paginate(20);
+}
+if ($query == 'Latest'){
+ $order = DB::table('movies')->select ('TITLE', 'YEAR')
+               ->where('GENERS','LIKE',"%$query2%")
+               ->where('IMDB_SCORE',$query1)
+               ->orderBy('created_at','desc')
+               ->Paginate(20);
+}
+  return response()->json (['status'=>'success',
+                            'data'=>$order
+                          ]);
+           }
+
+    else{
+      if ($query == 'YEAR'){
+
+  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+   ->where('GENERS','LIKE',"%$query2%")
+   ->orderBy('YEAR','desc')
+   ->Paginate(20);
+ }
+
+if ($query == 'Alphabetical'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+               ->where('GENERS','LIKE',"%$query2%")
+                ->orderBy('TITLE','asc')
+                  ->Paginate(20);
+}
+
+  if ($query == 'Oldest'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+                ->where('GENERS','LIKE',"%$query2%")
+                ->orderBy('created_at','asc')
+                ->Paginate(20);
+}
+if ($query == 'Latest'){
+ $order = DB::table('movies')->select ('TITLE', 'YEAR')
+               ->where('GENERS','LIKE',"%$query2%")
+               ->orderBy('created_at','desc')
+               ->Paginate(20);
+}
+}
+  return response()->json (['status'=>'success',
+                            'data'=>$order
+                          ]);
+
+});
+Route::get('/poster',function(Request $request){
+    $query = $request->input("q");
+    $order = DB::table('movies')
+       ->where('ID',$query)
+       ->get();
   return response()->json (['status'=>'success',
                             'data'=>$order
                           ]);
 });
-Route::get('/recomender1',function(){
 
 
-$recomender = DB::table('recomendations')->select('RECOMENDER')
-  ->where('user_id', Auth::user()->id)->get();
-  dump($recomender[0]);
-  $arr = explode(',', $recomender[0]->RECOMENDER);
-  return $arr;
-})->middleware('auth:api');
-  /*DB::table('users')
-            ->where('id', 1)
-            ->update(['votes' => 1]);*/
+
+Route::get('/actor',function(Request $request){
+    $query = $request->input("q");
+    $order = DB::table('movies')->select ('TITLE', 'YEAR')
+       ->where('ACTOR_1',$query)
+       ->orWhere('ACTOR_2',$query)
+       ->orWhere('ACTOR_3',$query)
+         ->orderBy('YEAR','desc')
+         ->get();
+  return response()->json (['status'=>'success',
+                            'data'=>$order
+                          ]);
+});
+
+Route::get('/director',function(Request $request){
+    $query = $request->input("q");
+    $ord = DB::table('movies')->select ('TITLE', 'YEAR')
+       ->where('DIRECTOR',$query)
+         ->orderBy('YEAR','desc')
+         ->get();
+  return response()->json (['status'=>'success',
+                            'data'=>$ord
+                          ]);
+});
 
 Route::get('/recomender',function(){
   $recomender = DB::table('recomendations')->select('RECOMENDER')
     ->where('user_id', Auth::user()->id)->get();
+    if(count($recomender) >0) {
     $rec = str_replace('"', "", $recomender[0]->RECOMENDER);
     $arr = explode(',', $rec);
+
+
     $rec = DB::table('movies')
                       ->whereIn('ID',$arr)
                       ->get();
+                    }
+    else {
+      $rec = DB::table('movies')
+                        ->whereIn('ID',['1','2','3','4','5','6','7','8','9','10'])
+                        ->get();
+
+    }
                       return response()->json([
                         'data'=>$rec
                       ]);
 })->middleware('auth:api');
-
-
-
+Route::post('/Register','MovieController@register');
+Route::post('/insertRec','MovieController@insertRecomendation')->middleware('auth:api');
+Route::post('/insertRate','MovieController@insertRating')->middleware('auth:api');
 
 
   /*  return View::make("your view here");*/
@@ -78,71 +172,6 @@ Route::get('/recomender',function(){
        $users = DB::table('users')->get();
 
        return $users; }); */
-Route::post('/insertRec','MovieController@insertRecomendation')->middleware('auth:api');
-Route::post('/insertRate','MovieController@insertRating')->middleware('auth:api');
-Route::get('/search',function(Request $request){
-      $query = $request->input("q");
-      $movie = DB::table('movies')
-      ->where('TITLE', 'LIKE', "%$query%")
-      ->get();
-      return response()->json([
-      'data'=>$movie
-      ]);
-});
-Route::get('movies/order/year',function(){
-  $order = DB::table('movies')
-                ->orderBy('YEAR', 'desc')
-                ->get();
-                return response()->json([
-                  'data'=>$order
-                ]);
-
-});
-Route::get('movies/order/site',function(){
-  $order = DB::table('movies')
-                ->orderBy('SITE_SCORE','desc')
-                ->get();
-                return response()->json([
-                  'data'=>$order
-                ]);
-              });
-  Route::get('movies/order/oldest',function(){
-  $order = DB::table('movies')
-  ->orderBy('created_at', 'asc')
-  ->get();
-   return response()->json([
-    'data'=>$order
-        ]);
-    });
-    Route::get('movies/order/alpha',function(){
-    $order = DB::table('movies')
-    ->orderby('TITLE', 'ASC')
-    ->get();
-     return response()->json([
-      'data'=>$order
-          ]);
-      });
-    Route::get('movies/order/latest',function(){
-    $order = DB::table('movies')
-     ->orderBy('created_at', 'desc')
-     ->get();
-      return response()->json([
-            'data'=>$order
-              ]);
-    });
-
-
-            Route::get('movies/order/imdb',function(){
-              $order = DB::table('movies')
-                              ->orderBy('IMDB_SCORE','desc')
-                              ->get();
-                              return response()->json([
-                                'data'=>$order
-                              ]);
-                            });
-Route::get('movies/{ID}',function($ID){
-  return response()->json (App\Movies::where('ID',$ID)->get());
-})->middleware('auth:api');
 
 /* ROute::get('api/movies/{ID}',,function ($ID = null){
    if ($ID ==null) {
@@ -173,14 +202,30 @@ Route::get('movies/{ID}',function($ID){
    'data' => $this->farmerTransformer->transformCollection($farmers->all())
   ]);
 
- }]);*/
+ }]);
+ Route::get('movies',function(){
+   $movies = App\Movies::all();
+   $count = count($movies);
+    return response()->json([
+      'count'=>$count,
+     'status'=>'success',
+     'data'=>$movies
 
 
+   ]);
+ })->middleware('auth:api');
+ Route::get('/recomender1',function(){
 
 
-
-
-
+ $recomender = DB::table('recomendations')->select('RECOMENDER')
+   ->where('user_id', Auth::user()->id)->get();
+   dump($recomender[0]);
+   $arr = explode(',', $recomender[0]->RECOMENDER);
+   return $arr;
+ })->middleware('auth:api');
+   /*DB::table('users')
+             ->where('id', 1)
+             ->update(['votes' => 1]);*/
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

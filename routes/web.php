@@ -12,10 +12,10 @@
 */
 
 Route::get('/test', function () {
-    $user = Auth::user();
+    /*$user = Auth::user();
     if ($user == null) {
       return redirect()->route('login');
-    }
+    }*/
     return view('test');
 
 });
