@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Movies;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,7 +14,30 @@ use App\Movies;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+*/ Route::post("/register", function(Request $request) {
+
+  $validator = Validator::make($request->all(), [
+    'name' => 'required',
+    'email' => 'required|email',
+    'password' => 'required',
+    //'c_password' => 'required|same:password',
+  ]);
+
+  if($validator->fails()){
+    return response()->json(["message"=> $validator->errors()], 400);
+  }
+
+  $input = $request->all();
+  $input['password'] = bcrypt($input['password']);
+  try{
+  $user = User::create($input);
+}
+catch(\Exception $exc) {
+   return response()->json(['err','email already exists .']);
+}
+
+  return response()->json(["message" => 'User register successfully.'], 200);
+});
 
 Route::get('/search',function(Request $request){
       $query = $request->input("q");
