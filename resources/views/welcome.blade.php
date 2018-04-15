@@ -98,7 +98,7 @@
               $('.mvs').html("");
         		  result['data'].forEach(function(elem) {
                 if (elem['IMAGEPATH']== '')
-                { elem['IMAGEPATH']='17'; }
+                { elem['IMAGEPATH']='17.jpg'; }
                 var x = `
                   <div>
                   <a href=""> <img class="img-responsive" src=" `+ window.location +`storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
