@@ -33,7 +33,7 @@ use App\User;
   $user = User::create($input);
 }
 catch(\Exception $exc) {
-   return response()->json(['err','email already exists .']);
+   return response()->json(["err"=>'email already exists .']);
 }
 
   return response()->json(["message" => 'User register successfully.'], 200);
@@ -41,7 +41,7 @@ catch(\Exception $exc) {
 
 Route::get('/search',function(Request $request){
       $query = $request->input("q");
-      $movie = DB::table('movies')->select('TITLE', 'YEAR')
+      $movie = DB::table('movies')->select('TITLE', 'YEAR','IMAGEPATH')
       ->where('TITLE', 'LIKE', "%$query%")
       ->get();
       return response()->json([

@@ -8,18 +8,12 @@
         <title>Movies</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!--Styles
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+
 
             .full-height {
                 height: 100vh;
@@ -59,6 +53,17 @@
                 margin-bottom: 30px;
             }
         </style> -->
+        <style>
+        html, body {
+
+            background-color: #474e5d;
+            color: #ffffff;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 100;
+            height: 100vh;
+            margin:100;
+        }
+        </style>
         <html>
 
     <head>
@@ -72,9 +77,9 @@
     </div>
       <div class="mvs">
 </div>
-
-
-
+<div class="nav-logo pull-left">
+ <!--<a href="http://127.0.0.1:8000"><img style="max-width:200px;max-height:200px"src="http://127.0.0.1:8000/storage/posters/1.jpg"></a> -->
+</div>
       <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
       <script>
@@ -92,11 +97,14 @@
             success: function(result){
               $('.mvs').html("");
         		  result['data'].forEach(function(elem) {
+                if (elem['IMAGEPATH']== '')
+                { elem['IMAGEPATH']='17'; }
                 var x = `
                   <div>
+                  <a href=""> <img class="img-responsive" src=" `+ window.location +`storage/posters/`+elem['IMAGEPATH']+`.jpg"  alt="marina" width="170" height="255"> </a>
             <p><strong>Title : </strong> ` + elem['TITLE'] + `</p>
            <p><strong>Year : </strong> ` + elem['YEAR'] + `</p>
-              </div>
+                 </div>
 
                      `;
 

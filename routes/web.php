@@ -29,8 +29,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/master',function (){
-  return view ('master');
+Route::get('/posters',function (){
+  return view ('posters');
 
 });
 Route::get('/child',function (){
