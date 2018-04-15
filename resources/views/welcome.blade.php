@@ -101,7 +101,7 @@
                 { elem['IMAGEPATH']='17'; }
                 var x = `
                   <div>
-                  <a href=""> <img class="img-responsive" src=" `+ window.location +`storage/posters/`+elem['IMAGEPATH']+`.jpg"  alt="marina" width="170" height="255"> </a>
+                  <a href=""> <img class="img-responsive" src=" `+ window.location +`storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
             <p><strong>Title : </strong> ` + elem['TITLE'] + `</p>
            <p><strong>Year : </strong> ` + elem['YEAR'] + `</p>
                  </div>
