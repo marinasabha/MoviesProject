@@ -34,7 +34,7 @@ class MovieController extends Controller
 
    ]);
 }
-   }
+  }
 
 
 

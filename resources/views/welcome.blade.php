@@ -75,7 +75,12 @@
       <input type="text" class="key">
       <button class="mybtn">Search</button>
     </div>
+    <div class="row">
+
       <div class="mvs">
+<div class="col-md-8 col-md-8 col-md-8 col-md-8">
+</div>
+</div>
 </div>
 <div class="nav-logo pull-left">
  <!--<a href="http://127.0.0.1:8000"><img style="max-width:200px;max-height:200px"src="http://127.0.0.1:8000/storage/posters/1.jpg"></a> -->
@@ -97,11 +102,11 @@
             success: function(result){
               $('.mvs').html("");
         		  result['data'].forEach(function(elem) {
+
                 if (elem['IMAGEPATH']== '')
-                { elem['IMAGEPATH']='17.jpg'; }
+                { elem['IMAGEPATH']='17'; }
                 var x = `
-                  <div>
-                  <a href=""> <img class="img-responsive" src=" `+ window.location +`storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+                  <a href=""> <img class="img-responsive" src=" `+ window.location +`storage/posters/`+elem['IMAGEPATH']+`.jpg"  alt="marina" width="170" height="255"> </a>
             <p><strong>Title : </strong> ` + elem['TITLE'] + `</p>
            <p><strong>Year : </strong> ` + elem['YEAR'] + `</p>
                  </div>
