@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-
+<div class="row">
+  <p> </p>
 @foreach ($movies as $movie)
-{{ $movie->TITLE }}
 @include('movie', ["movie" => $movie])
 
 
