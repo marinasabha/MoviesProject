@@ -8,9 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'MARINA') }}</title>
 
     <!-- Styles -->
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -29,7 +31,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'MARINA') }}
                     </a>
                 </div>
 
@@ -40,7 +42,17 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+
                     <ul class="nav navbar-nav navbar-right">
+                      <!-- Search Box -->
+                        <li>
+                          <div>
+                            <form type="GET" action="/search" >
+                              <input class="search-box" name="term" id="search-box" type="text" placeholder="Search" />
+                              <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                          <div>
+                        <li/>
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>

@@ -25,7 +25,7 @@ Route::get('/kenda', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
 
 
@@ -37,6 +37,7 @@ Route::get('/child',function (){
   return view ('child');
 
 });
+Route::get('/search', 'searchController@search')->name('search');
 Route::resource('/student','StudentController');
 Route::get('/ajaxdata', 'AjaxdataController@index')->name('ajaxdata');
 Route::get('/ajaxdata/getdata', 'AjaxdataController@getdata')->name('ajaxdata.getdata');
