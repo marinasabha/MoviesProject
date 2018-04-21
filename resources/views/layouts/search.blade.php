@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-  <p> </p>
-@foreach ($movies as $movie)
-@include('movie', ["movie" => $movie])
-
-
+@foreach ($movies->chunk(4) as $chunk)
+    <div class="container-fluid row">
+      @foreach($chunk as $movie)
+        @include('movie', ["movie" => $movie])
+      @endforeach
+      </div>
 @endforeach
 
 
