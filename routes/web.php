@@ -37,7 +37,7 @@ Route::get('/child',function (){
   return view ('child');
 
 });
-Route::get('/poster/{ID}', 'MovieeController@posterr');
+Route::get('/movie/{ID}', 'MovieeController@posterr');
 Route::get('/search', 'searchController@search')->name('search');
 Route::resource('/student','StudentController');
 Route::get('/ajaxdata', 'AjaxdataController@index')->name('ajaxdata');

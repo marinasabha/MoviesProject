@@ -4,7 +4,7 @@
 
 class Moviee{
   public static function poster($ID){
-      $order = DB::table('movies')->select('TITLE','IMDB_LINK','IMDB_SCORE','LANGUAGE','COUNTRY', 'YEAR','IMAGEPATH','ID','DIRECTOR','DURATION','ACTOR_1','GENERS')
+      $order = DB::table('movies')
          ->where('ID',$ID)
          ->get();
     return array('data'=> $order);
