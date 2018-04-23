@@ -9,9 +9,9 @@
 @endif
 </div>
   <div class="col-md-3">
-<a href=""><p > <strong>{{ $order[0]->TITLE }}</strong></p></a>
+<p> <strong>{{ $order[0]->TITLE }}</strong></p>
 <p style="color:gray">{{ $order[0]->YEAR }}</p>
-<a href=""> <p style="color:gray">{{ $order[0]->GENERS }}</p> </a>
+ <p style="color:gray">{{ $order[0]->GENERS }}</p>
 <strong>IMDB_LINK :</strong> <a href= ""> <p style="color:gray"> {{ $order[0]->IMDB_LINK }}</p> </a>
 <p> {{ $order[0]->DESCRIBTION }}</p>
  <strong> Director : </strong><a href=""> <p style="color:gray">{{ $order[0]->DIRECTOR }}</p> </a>

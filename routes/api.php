@@ -1,4 +1,4 @@
-<?php
+z<?php
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -59,7 +59,7 @@ Route::get('/orderby',function(Request $request){
 
   $order = DB::table('movies')->select ('TITLE', 'YEAR')
    ->where('GENERS','LIKE',"%$query2%")
-   ->where('IMDB_SCORE',$query1)
+   ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
    ->orderBy('YEAR','desc')
    ->Paginate(20);
  }
@@ -67,7 +67,7 @@ Route::get('/orderby',function(Request $request){
 if ($query == 'Alphabetical'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR')
                ->where('GENERS','LIKE',"%$query2%")
-               ->where('IMDB_SCORE',$query1)
+               ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                 ->orderBy('TITLE','asc')
               ->Paginate(20);
 }
@@ -75,14 +75,14 @@ if ($query == 'Alphabetical'){
   if ($query == 'Oldest'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR')
                 ->where('GENERS','LIKE',"%$query2%")
-                ->where('IMDB_SCORE',$query1)
+                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                 ->orderBy('created_at','asc')
                 ->Paginate(20);
 }
 if ($query == 'Latest'){
  $order = DB::table('movies')->select ('TITLE', 'YEAR')
                ->where('GENERS','LIKE',"%$query2%")
-               ->where('IMDB_SCORE',$query1)
+               ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                ->orderBy('created_at','desc')
                ->Paginate(20);
 }

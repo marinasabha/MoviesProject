@@ -33,8 +33,8 @@ Route::get('/posters',function (){
   return view ('posters');
 
 });
-Route::get('/child',function (){
-  return view ('child');
+Route::get('/test',function (){
+  return view ('layouts.test');
 
 });
 Route::get('/movie/{ID}', 'MovieeController@posterr');

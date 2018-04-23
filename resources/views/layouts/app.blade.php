@@ -66,6 +66,7 @@
                             </form>
                           <div>
                         <li/>
+
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
