@@ -8,9 +8,4 @@
       @endforeach
       </div>
 @endforeach
-
-
-
-
-
 @endsection

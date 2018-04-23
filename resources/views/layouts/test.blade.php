@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+
 <div class="container">
 <p class="pull-left term">Search Term:</p>
 <input name="keyword" autocomplete="off" type="search">
@@ -70,4 +69,3 @@
 </div>
 </form>
 </div>
-@endsection

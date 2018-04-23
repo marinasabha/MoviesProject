@@ -15,17 +15,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
-    html, body {
 
+    html,body {
         background-color: #474e5d;
         color: black;
         font-family: 'Raleway', sans-serif;
         font-weight: 100;
-        height: 100vh;
-        margin:100;
-    }
-    color: black;
-    p {color:#ffffff;}
+        height: 100;
+      }
     </style>
 </head>
 <body>
@@ -64,9 +61,8 @@
                               <input class="search-box" name="term" id="search-box" type="text" placeholder="Search" />
                               <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
-                          <div>
-                        <li/>
-
+                      </div>
+                    </li>
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>

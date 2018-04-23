@@ -10,13 +10,5 @@
       return array('data' => $movies );
     }
   }
-  class Moviee{
-    public static function poster($ID){
-        $order = DB::table('movies')
-           ->where('ID',$ID)
-           ->get();
-      return array('data'=> $order);
-    }
 
-  }
  ?>
