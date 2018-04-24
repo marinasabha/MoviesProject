@@ -128,7 +128,7 @@ if ($query == 'Latest'){
 Route::get('/poster',function(Request $request){
     $query = $request->input("q");
     $order = DB::table('movies')
-       ->where('ID',$query)
+       ->where('TITLE',$query)
        ->get();
   return response()->json (['status'=>'success',
                             'data'=>$order
