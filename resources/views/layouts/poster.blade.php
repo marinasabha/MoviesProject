@@ -14,12 +14,12 @@
  <p style="color:gray">{{ $order[0]->GENERS }}</p>
 <strong>IMDB_LINK :</strong> <a href= ""> <p style="color:gray"> {{ $order[0]->IMDB_LINK }}</p> </a>
 <p> {{ $order[0]->DESCRIBTION }}</p>
- <strong> Director : </strong><a href=""> <p style="color:gray">{{ $order[0]->DIRECTOR }}</p> </a>
+ <strong> Director : </strong><a href="/director/{{ $order[0]->DIRECTOR }}"> <p style="color:gray">{{ $order[0]->DIRECTOR }}</p> </a>
 <div style="color:gray">
   <strong> Actors : </strong>
-<a href=""><p style="color:gray"> {{ $order[0]->ACTOR_1 }}</p> </a>
-<a href=""> <p style="color:gray">{{ $order[0]->ACTOR_2 }}</p> </a>
-<a href=""> <p style="color:gray"> {{ $order[0]->ACTOR_3 }}</p> </a>
+<a href="/actor/{{ $order[0]->ACTOR_1 }}"><p style="color:gray"> {{ $order[0]->ACTOR_1 }}</p> </a>
+<a href="/actor/{{ $order[0]->ACTOR_2 }}"> <p style="color:gray">{{ $order[0]->ACTOR_2 }}</p> </a>
+<a href="/actor/{{ $order[0]->ACTOR_3 }}"> <p style="color:gray"> {{ $order[0]->ACTOR_3 }}</p> </a>
 </div>
 </div>
 </div>

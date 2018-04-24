@@ -1,4 +1,3 @@
-
 <div class="movie">
   <div class="col-md-3">
   @if($movie->IMAGEPATH == "")

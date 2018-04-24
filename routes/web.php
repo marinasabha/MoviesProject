@@ -33,10 +33,8 @@ Route::get('/posters',function (){
   return view ('posters');
 
 });
-Route::get('/test',function (){
-  return view ('layouts.test');
-
-});
+Route::get('/director/{term}', 'DirectorController@director');
+Route::get('/actor/{term}', 'ActorController@actor');
 Route::get('/movie/{ID}', 'MovieeController@posterr');
 Route::get('/search', 'searchController@search')->name('search');
 Route::resource('/student','StudentController');

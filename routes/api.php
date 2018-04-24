@@ -1,4 +1,4 @@
-z<?php
+<?php
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
