@@ -11,9 +11,14 @@
     <title>{{ 'MOVIE' }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
 
@@ -31,14 +36,6 @@
             <div class="container">
                 <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
--->
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ 'Movies' }}
@@ -57,12 +54,46 @@
                       <!-- Search Box -->
                         <li>
                           <div>
-                            <form type="GET" action="/search" >
-                              <input class="search-box" name="term" id="search-box" type="text" placeholder="Search" />
-                              <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
+                             <select class="itemName form-control" style="width:500px; position:absolute !important; top:70px !important ;" name="itemName"></select>
                       </div>
                     </li>
+                    <script>
+                    function formatData (data) {
+                            if ( data.image== '' ) { data.image ='marina.jpg'; }
+                            var $result= $(
+                                '<a href=""> <div> <span style ="color:black"><img style="max-width:40px" src="'+window.location +'storage/posters/'+ data.image +'"/>'+ " " +data.text +'</span> <div> </a>'
+
+                            );
+                            return $result;
+                        };
+
+                        $('.itemName').select2({
+                            placeholder: 'Select an item',
+                            templateResult: formatData,
+                            templateSelection: formatData,
+                            ajax: {
+                                url: '/quick',
+                                dataType: 'json',
+                                delay: 250,
+                                processResults: function (data) {
+                                    return {
+                                        results:  $.map(data, function (item) {
+                                            return {
+
+                                                text: item.TITLE,
+                                                image: item.IMAGEPATH,
+                                                id: item.ID
+
+                                            }
+                                        })
+                                    };
+                                },
+                                cache: true
+                            }
+                        });
+
+                        </script>
+
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -95,8 +126,5 @@
 
         @yield('content')
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

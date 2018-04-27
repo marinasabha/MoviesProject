@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/quick', 'ComController@dataAjax');
+Route::get('/quicksearch', 'SelectController@dataAjax');
 Route::get('/test', function () {
     /*$user = Auth::user();
     if ($user == null) {
