@@ -26,7 +26,7 @@ Route::get('/kenda', function () {
 });
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('layouts.actors');
 });
 
 

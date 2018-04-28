@@ -54,7 +54,7 @@
                       <!-- Search Box -->
                         <li>
                           <div>
-                             <select class="itemName form-control" style="width:500px; position:absolute !important; top:70px !important ;" name="itemName"></select>
+                             <select class="itemName form-control" style="width:500px;top:70px !important ;" name="itemName"></select>
                       </div>
                     </li>
                     <script>
@@ -68,6 +68,7 @@
                         };
 
                         $('.itemName').select2({
+
                             placeholder: 'Select an item',
                             templateResult: formatData,
                             templateSelection: formatData,

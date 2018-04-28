@@ -1,0 +1,163 @@
+.browse-movie-wrap {
+    //padding: 0;
+    //margin: 10px;
+}
+
+.ibox-bordered {
+    background-color: black;
+    border: 5px solid #75c74e;
+    padding: 0 35px 5px 35px;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ibox-bordered h1,
+.ibox-bordered p {
+    color: white;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.ibox-bordered p {
+    line-height: 30px;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+.ibox-bordered .title {
+    margin-top: 5px;
+    width: 80%;
+    border-bottom: 1px solid grey;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+
+.ibox-bordered .title h1 {
+    font-size: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+/*
+.ibox-bordered .title h1:before {
+    content: url(/process.php?d=My1Q6HOGh8ov2PbaUuut0%2BiNiWPI1dhQTVxMg6UmzjCrhL3PFiMPICglkKoQGEfiUUYIZMk6CeY%3D&b=1);
+    padding-right: 20px;
+}
+*/
+
+.ibox-bordered .title img {
+    position: relative;
+    top: 65px;
+    left: 175px;
+}
+
+.ibox-bordered .blue {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #4c96d0;
+}
+
+.ibox-bordered a {
+    text-decoration: none;
+}
+
+.ibox-bordered .button {
+    background-color: #75c74e;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.ibox-bordered .button img {
+    float: left;
+    margin-top: 8px;
+    margin-left: 22px;
+}
+
+.ibox-bordered .button p {
+    padding: 3px 0;
+    text-shadow: 2px 2px #4b9924;
+    font-weight: bold;
+}
+
+.home-content {
+    padding: 0;
+}
+
+a:hover {
+    border-color: #6ac045 !important;
+}
+
+i {
+    color: #6ac045 !important;
+}
+
+.fddc {
+    top: 10px;
+    margin: 0;
+    padding: 5px;
+    width: 280px;
+    text-align: center;
+    background: #509b2f;
+    color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    transition: all 300ms ease;
+}
+
+.v211 {
+    margin-top: 20px;
+}
+
+.modal.modal-auth {
+    visibility: hidden;
+    opacity: 0;
+    z-index: 0;
+    display: none;
+}
+
+.modal-container {
+    position: absolute;
+    top: 50px;
+    left: 20%;
+}
+
+.modal.active {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    z-index: 999999;
+}
+
+.modal-login-content {
+    display: none;
+}
+
+.modal-register-content {
+    display: none;
+}
+
+.modal-login-content.active {
+    display: block;
+}
+
+.modal-register-content.active {
+    display: block;
+}
+
+#modal-background {
+    opacity: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999998;
+}

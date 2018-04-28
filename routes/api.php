@@ -57,34 +57,34 @@ Route::get('/orderby',function(Request $request){
    {
      if ($query == 'YEAR'){
 
-  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
    ->where('GENERS','LIKE',"%$query2%")
    ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
    ->orderBy('YEAR','desc')
-   ->Paginate(20);
+   ->get();
  }
 
 if ($query == 'Alphabetical'){
-  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
                ->where('GENERS','LIKE',"%$query2%")
                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                 ->orderBy('TITLE','asc')
-              ->Paginate(20);
+              ->get();
 }
 
   if ($query == 'Oldest'){
-  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
                 ->where('GENERS','LIKE',"%$query2%")
                 ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                 ->orderBy('created_at','asc')
-                ->Paginate(20);
+                ->get();
 }
 if ($query == 'Latest'){
- $order = DB::table('movies')->select ('TITLE', 'YEAR')
+ $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
                ->where('GENERS','LIKE',"%$query2%")
                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                ->orderBy('created_at','desc')
-               ->Paginate(20);
+               ->get();
 }
   return response()->json (['status'=>'success',
                             'data'=>$order
@@ -94,30 +94,30 @@ if ($query == 'Latest'){
     else{
       if ($query == 'YEAR'){
 
-  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
    ->where('GENERS','LIKE',"%$query2%")
    ->orderBy('YEAR','desc')
-   ->Paginate(20);
+   ->get();
  }
 
 if ($query == 'Alphabetical'){
-  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
                ->where('GENERS','LIKE',"%$query2%")
                 ->orderBy('TITLE','asc')
-                  ->Paginate(20);
+                  ->get();
 }
 
   if ($query == 'Oldest'){
-  $order = DB::table('movies')->select ('TITLE', 'YEAR')
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
                 ->where('GENERS','LIKE',"%$query2%")
                 ->orderBy('created_at','asc')
-                ->Paginate(20);
+                ->get();
 }
 if ($query == 'Latest'){
- $order = DB::table('movies')->select ('TITLE', 'YEAR')
+ $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
                ->where('GENERS','LIKE',"%$query2%")
                ->orderBy('created_at','desc')
-               ->Paginate(20);
+               ->get();
 }
 }
   return response()->json (['status'=>'success',
