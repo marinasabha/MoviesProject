@@ -139,7 +139,7 @@ Route::get('/poster',function(Request $request){
 
 Route::get('/actor',function(Request $request){
     $query = $request->input("q");
-    $order = DB::table('movies')->select ('TITLE', 'YEAR')
+    $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
        ->where('ACTOR_1',$query)
        ->orWhere('ACTOR_2',$query)
        ->orWhere('ACTOR_3',$query)
@@ -152,7 +152,7 @@ Route::get('/actor',function(Request $request){
 
 Route::get('/director',function(Request $request){
     $query = $request->input("q");
-    $ord = DB::table('movies')->select ('TITLE', 'YEAR')
+    $ord = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH')
        ->where('DIRECTOR',$query)
          ->orderBy('YEAR','desc')
          ->get();

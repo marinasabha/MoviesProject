@@ -12,7 +12,7 @@
 <p> <strong>{{ $order[0]->TITLE }}</strong></p>
 <p style="color:gray">{{ $order[0]->YEAR }}</p>
  <p style="color:gray">{{ $order[0]->GENERS }}</p>
-<strong>IMDB_LINK :</strong> <a href= ""> <p style="color:gray"> {{ $order[0]->IMDB_LINK }}</p> </a>
+<strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}">   <img src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a>
 <p> {{ $order[0]->DESCRIBTION }}</p>
  <strong> Director : </strong><a href="/director/{{ $order[0]->DIRECTOR }}"> <p style="color:gray">{{ $order[0]->DIRECTOR }}</p> </a>
 <div style="color:gray">

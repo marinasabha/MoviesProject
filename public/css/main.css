@@ -2,3 +2,9 @@
   border-radius: 10px;
   margin: 10px;
 }
+.select2-selection__rendered img{
+ max-width: 20px!important;
+}
+.select2-results__option img{
+    max-width: 40px!important;
+}

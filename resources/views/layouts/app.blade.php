@@ -28,6 +28,12 @@
         font-weight: 100;
         height: 100;
       }
+      .select2-selection__rendered img{
+ max-width: 12px!important;
+}
+.select2-results__option img{
+    max-width: 40px!important;
+}
     </style>
 </head>
 <body>
@@ -52,20 +58,24 @@
 
                     <ul class="nav navbar-nav navbar-right">
                       <!-- Search Box -->
-                        <li>
+                        <li style="padding:10px">
                           <div>
-                             <select class="itemName form-control" style="width:500px;top:70px !important ;" name="itemName"></select>
+                      <select class="itemName form-control"style="width:400px" name="itemName"></select>
+
                       </div>
                     </li>
+                    <li> <a href="" id="search-btn">quicksearch</a></li>
+
                     <script>
                     function formatData (data) {
-                            if ( data.image== '' ) { data.image ='marina.jpg'; }
-                            var $result= $(
-                                '<a href=""> <div> <span style ="color:black"><img style="max-width:40px" src="'+window.location +'storage/posters/'+ data.image +'"/>'+ " " +data.text +'</span> <div> </a>'
-
-                            );
-                            return $result;
-                        };
+                       if (!data.id) { return data.text; }
+                    if ( data.image== '' ) { data.image ='marina.jpg'; }
+                    var $result= $(
+                          '<a href="/movie/'+data.id+'"> <div> <span style ="color:black"><img style="max-width:40px" src="http://127.0.0.1:8000/storage/posters/'+ data.image +'"/>'+ " " +data.text +'</span> <div> </a>'
+                          );
+                      $('#search-btn').attr('href','/movie/'+data.id+'')
+                      return $result;
+                  };
 
                         $('.itemName').select2({
 
