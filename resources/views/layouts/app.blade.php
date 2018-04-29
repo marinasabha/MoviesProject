@@ -71,7 +71,7 @@
                        if (!data.id) { return data.text; }
                     if ( data.image== '' ) { data.image ='marina.jpg'; }
                     var $result= $(
-                          '<a href="/movie/'+data.id+'"> <div> <span style ="color:black"><img style="max-width:40px" src="'+window.location+'storage/posters/'+ data.image +'"/>'+ " " +data.text +'</span> <div> </a>'
+                          '<a href="/movie/'+data.id+'"> <div> <span style ="color:black"><img style="max-width:40px" src="/storage/posters/'+ data.image +'"/>'+ " " +data.text +'</span> <div> </a>'
                           );
                       $('#search-btn').attr('href','/movie/'+data.id+'')
                       return $result;
