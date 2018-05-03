@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-3">
  @if($order[0]->IMAGEPATH == "")
-  <img src="/storage/posters/1.jpg" style="width:250px;height:350px" alt="default movie image" />
+  <img src="/storage/posters/marina.jpg" style="width:250px;height:350px" alt="default movie image" />
 @else
   <img class="img-responsive" style="width:250px;height:350px" src="/storage/posters/{{ $order[0]->IMAGEPATH }}" />
 @endif
@@ -14,6 +14,65 @@
  <p style="color:gray">{{ $order[0]->GENERS }}</p>
 <strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}">   <img src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a>
 <p> {{ $order[0]->DESCRIBTION }}</p>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  @guest
+  @else
+<div class="leave-rating margin-bottom-30"style="height:50px">
+							<input type="radio" name="rating" class="rate" id="rating-1" value="5"/>
+							<label for="rating-1" class="fa fa-star"></label>
+							<input type="radio" name="rating" class="rate" id="rating-2" value="4"/>
+							<label for="rating-2" class="fa fa-star "></label>
+							<input type="radio" name="rating" class="rate" id="rating-3" value="3"/>
+							<label for="rating-3" class="fa fa-star"></label>
+							<input type="radio" name="rating" class="rate" id="rating-4" value="2"/>
+							<label for="rating-4" class="fa fa-star"></label>
+							<input type="radio" name="rating" class="rate" id="rating-5" value="1"/>
+							<label for="rating-5" class="fa fa-star"></label>
+						</div>
+<script>
+            $(document).ready(function(){
+
+            $('.leave-rating input').change(function () {
+            		var $radio = $(this);
+
+            		$('.leave-rating .selected').removeClass('selected');
+            		$radio.closest('label').addClass('selected');
+
+                $.ajaxSetup({
+                  headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                         }
+                  });
+                $.ajax({
+                  type:"POST",
+                  url:'/insertRat',
+                  data:{'RATING':$radio.val(),'movie_id':{{ $order[0]->ID }}},
+                    dataType: "json",
+                    error: function (request, error) {
+                alert(error);
+
+                  },
+
+                    success: function(result){
+                    console.log(result);
+
+                  }
+    });
+            	});
+
+});
+</script>
+
+  @endguest
+
+
+
+
+
  <strong> Director : </strong><a href="/director/{{ $order[0]->DIRECTOR }}"> <p style="color:gray">{{ $order[0]->DIRECTOR }}</p> </a>
 <div style="color:gray">
   <strong> Actors : </strong>

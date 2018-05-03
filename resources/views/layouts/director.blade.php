@@ -6,7 +6,7 @@
         <div class="movie">
           <div class="col-md-3">
           @if($direct->IMAGEPATH == "")
-            <a href="/movie/{{ $direct->ID }}">  <img src="/storage/posters/1.jpg" style="width:170px;height:250px" alt="default movie image" /> </a>
+            <a href="/movie/{{ $direct->ID }}">  <img src="/storage/posters/marina.jpg" style="width:170px;height:250px" alt="default movie image" /> </a>
           @else
             <a href="/movie/{{ $direct->ID }}">  <img class="img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $direct->IMAGEPATH }}" /> </a>
           @endif

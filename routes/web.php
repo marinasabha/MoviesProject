@@ -26,7 +26,7 @@ Route::get('/kenda', function () {
 });
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('layouts.search');
 });
 
 
@@ -34,6 +34,7 @@ Route::get('/posters',function (){
   return view ('posters');
 
 });
+Route::post('/insertRat', 'MovieeController@insertRate');
 Route::get('/director/{term}', 'DirectorController@director');
 Route::get('/actor/{term}', 'ActorController@actor');
 Route::get('/movie/{ID}', 'MovieeController@posterr');
@@ -43,5 +44,6 @@ Route::get('/ajaxdata', 'AjaxdataController@index')->name('ajaxdata');
 Route::get('/ajaxdata/getdata', 'AjaxdataController@getdata')->name('ajaxdata.getdata');
 
 Auth::routes();
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 Route::get('/home', 'HomeController@index')->name('home');

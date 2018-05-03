@@ -44,7 +44,6 @@ class MovieController extends Controller
  $collection = new Collection ();
  $collection->user_id = Auth::user()->id;
  $collection->movie_id =$request->input("movie_id");
- $collection->WATCHED=true;
   $data=DB::table('collections')->where(
                ['user_id'=>Auth::user()->id,
                 'movie_id'=>$request->movie_id
