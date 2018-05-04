@@ -79,7 +79,7 @@ $(document).ready(function(){
 $('.mybtn').on('click',function(){
 $.ajax({
   type: "GET",
-    url: 'http://127.0.0.1:8000/api/orderby?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val(),
+    url: '/api/orderby?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val(),
   data:{},
     dataType: "json",
     error: function (request, error) {
