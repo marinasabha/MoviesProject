@@ -18,4 +18,11 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Caching
+    <IfModule mod_expires.c>
+      ExpiresActive On
+      ExpiresByType text/css "access 1 month"
+      ExpiresByType image/jpeg "access 1 month"
+    </IfModule>
 </IfModule>

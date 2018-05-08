@@ -12,7 +12,7 @@
           @endif
         <p>{{ $direct->TITLE }}</p>
           <p>{{ $direct->YEAR }}</p>
-          <p>{{ $direct->DIRECTOR }}</p>
+        
 
         </div>
         </div>

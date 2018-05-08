@@ -12,9 +12,7 @@
           @endif
         <p>{{ $actor->TITLE }}</p>
           <p>{{ $actor->YEAR }}</p>
-          <p>{{ $actor->ACTOR_1 }}</p>
-            <p>{{ $actor->ACTOR_2 }}</p>
-              <p>{{ $actor->ACTOR_3 }}</p>
+
         </div>
         </div>
 @endforeach

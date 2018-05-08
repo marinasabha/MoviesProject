@@ -1,5 +1,29 @@
 @extends('layouts.app')
 @section('content')
+
+<?php
+ function checked ($id,$value)
+ {
+   if(\App\Collection::where('movie_id',$id)->where('user_id',Auth::user()->id)->count()){
+     $rate=\App\Collection::where('movie_id',$id)->where('user_id',Auth::user()->id)->get();
+     foreach($rate as $rate_value){
+       if ($rate_value->RATING==$value){
+         return 'checked';
+       }
+     }
+  }
+     else {
+       return '';
+     }
+   }
+
+ ?>
+
+
+
+
+
+
     <div class="row">
       <div class="col-md-3">
  @if($order[0]->IMAGEPATH == "")
@@ -22,15 +46,15 @@
   @guest
   @else
 <div class="leave-rating margin-bottom-30"style="height:50px">
-							<input type="radio" name="rating" class="rate" id="rating-1" value="5"/>
+							<input type="radio" name="rating" class="rate" id="rating-1" value="5" {{checked($order[0]->ID,5)}}/>
 							<label for="rating-1" class="fa fa-star"></label>
-							<input type="radio" name="rating" class="rate" id="rating-2" value="4"/>
+							<input type="radio" name="rating" class="rate" id="rating-2" value="4" {{checked($order[0]->ID,4)}}/>
 							<label for="rating-2" class="fa fa-star "></label>
-							<input type="radio" name="rating" class="rate" id="rating-3" value="3"/>
+							<input type="radio" name="rating" class="rate" id="rating-3" value="3" {{checked($order[0]->ID,3)}}/>
 							<label for="rating-3" class="fa fa-star"></label>
-							<input type="radio" name="rating" class="rate" id="rating-4" value="2"/>
+							<input type="radio" name="rating" class="rate" id="rating-4" value="2" {{checked($order[0]->ID,2)}}/>
 							<label for="rating-4" class="fa fa-star"></label>
-							<input type="radio" name="rating" class="rate" id="rating-5" value="1"/>
+							<input type="radio" name="rating" class="rate" id="rating-5" value="1" {{checked($order[0]->ID,1)}}/>
 							<label for="rating-5" class="fa fa-star"></label>
 						</div>
 <script>

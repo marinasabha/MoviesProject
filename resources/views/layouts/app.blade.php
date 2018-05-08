@@ -23,9 +23,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-<!--   background:url(img/background.jpg); no-repeat center center; background-size: cover; -webkit-background-size: cover;-moz-background-size: cover; -o-background-size: cover; -->
+
     <style>
     html,body {
 
@@ -75,6 +74,7 @@
     </style>
 </head>
 <body>
+
 
     <div id="app">
 
@@ -183,7 +183,10 @@
                 </div>
             </div>
         </nav>
+
+
+
         @yield('content')
-       
+
 </body>
 </html>
