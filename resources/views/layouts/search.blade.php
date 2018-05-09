@@ -59,9 +59,9 @@
 <div class="drop_menu drop_menu-last" style="position:absolute;right:-100px" >
 <p><b>Order By:</b></p>
 <select class="selects-container"id="id3" >
-<option value="Latest" selected="selected">YEAR</option>
+<option value="YEAR" selected="selected">Year</option>
 <option value="Oldest">Oldest</option>
-<option value="YEAR">Year</option>
+<option value="Latest">Latest</option>
 <option value="Alphabetical">Alphabetical</option>
 </select>
 </div>
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
   $.ajax({
     type: "GET",
-      url: '/api/orderby?t=YEAR&r=8&g=action',
+      url: '/api/orderby?t=YEAR&r=-1&g=|',
     data:{},
       dataType: "json",
       error: function (request, error) {
