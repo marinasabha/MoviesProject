@@ -33,10 +33,10 @@
 @endif
 </div>
   <div class="col-md-3">
-<p> <strong>{{ $order[0]->TITLE }}</strong></p>
+<p> <strong>{{ $order[0]->TITLE }}</strong></p> 
 <p style="color:gray">{{ $order[0]->YEAR }}</p>
  <p style="color:gray">{{ $order[0]->GENERS }}</p>
-<strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}">   <img src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a>
+<strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}" target="_blank">   <img src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a>
 <p> {{ $order[0]->DESCRIBTION }}</p>
 
 
