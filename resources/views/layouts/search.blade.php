@@ -79,7 +79,7 @@ $(document).ready(function(){
 
   $.ajax({
     type: "GET",
-      url: '/api/orderby2?t=YEAR&r=8&g=action',
+      url: '/api/orderby?t=YEAR&r=8&g=action',
     data:{},
       dataType: "json",
       error: function (request, error) {
