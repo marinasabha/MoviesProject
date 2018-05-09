@@ -6,7 +6,7 @@
     public static function search($term) {
       $movies = DB::table('movies')->select('TITLE', 'YEAR','IMAGEPATH','ID')
       ->where('TITLE', 'LIKE', "%$term%")
-      ->get();
+      -> paginate();
       return array('data' => $movies );
     }
   }
