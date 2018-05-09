@@ -59,7 +59,7 @@
 <div class="drop_menu drop_menu-last" style="position:absolute;right:-100px" >
 <p><b>Order By:</b></p>
 <select class="selects-container"id="id3" >
-<option value="Latest" selected="selected">Latest</option>
+<option value="Latest" selected="selected">YEAR</option>
 <option value="Oldest">Oldest</option>
 <option value="YEAR">Year</option>
 <option value="Alphabetical">Alphabetical</option>
@@ -96,7 +96,7 @@ $(document).ready(function(){
         var x = `
         <div class="col-md-3" style="height:350px" >
         <a href="/movie/`+elem['ID']+`"><img class="img-responsive" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
-          <p style="height:30px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+          <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
           <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
           </div>
             `;
@@ -127,7 +127,7 @@ alert(request);
       var x = `
       <div class="col-md-3" style="height:350px" >
       <a href="/movie/`+elem['ID']+`"><img class="img-responsive" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
-        <p style="height:15px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+        <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
         <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
         </div>
           `;
