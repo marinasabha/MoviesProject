@@ -49,10 +49,11 @@ Route::get('/search',function(Request $request){
       ]);
 });
 
-Route::get('/orderby',function(Request $request){
+Route::get('/orderby2',function(Request $request){
     $query = $request->input("t");
     $query1 = $request->input("r");
     $query2 = $request->input("g");
+    $page = $request->input("page", 1);
    if($query1 <> '-1')
    {
      if ($query == 'YEAR'){
@@ -61,15 +62,15 @@ Route::get('/orderby',function(Request $request){
    ->where('GENERS','LIKE',"%$query2%")
    ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
    ->orderBy('YEAR','desc')
-   ->get();
+   ->paginate(12);
  }
 
 if ($query == 'Alphabetical'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                ->where('GENERS','LIKE',"%$query2%")
                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
-                ->orderBy('TITLE','asc')
-              ->get();
+               ->orderBy('TITLE','asc')
+               ->paginate(12);
 }
 
   if ($query == 'Oldest'){
@@ -77,14 +78,14 @@ if ($query == 'Alphabetical'){
                 ->where('GENERS','LIKE',"%$query2%")
                 ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                 ->orderBy('ID','desc')
-                ->get();
+                ->paginate(12);
 }
 if ($query == 'Latest'){
  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                ->where('GENERS','LIKE',"%$query2%")
                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
                ->orderBy('ID','asc')
-               ->get();
+               ->paginate(12);
 }
   return response()->json (['status'=>'success',
                             'data'=>$order
@@ -98,21 +99,100 @@ if ($query == 'Latest'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','GENERS','ID')
    ->where('GENERS','LIKE',"%$query2%")
    ->orderBy('YEAR','desc')
-   ->get();
+   ->paginate(12);
  }
 
 if ($query == 'Alphabetical'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
-               ->where('GENERS','LIKE',"%$query2%")
+                ->where('GENERS','LIKE',"%$query2%")
                 ->orderBy('TITLE','asc')
-                  ->get();
+                ->paginate(12);
 }
 
   if ($query == 'Oldest'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                 ->where('GENERS','LIKE',"%$query2%")
                 ->orderBy('created_at','desc')
+                ->paginate(12);
+}
+if ($query == 'Latest'){
+ $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+               ->where('GENERS','LIKE',"%$query2%")
+               ->orderBy('created_at','asc')
+               ->paginate(12);
+}
+}
+  return response()->json (['status'=>'success',
+                            'data'=>$order
+                          ]);
+
+});
+
+Route::get('/orderby',function(Request $request){
+    $query = $request->input("t");
+    $query1 = $request->input("r");
+    $query2 = $request->input("g");
+    $page = $request->input("page", 1);
+   if($query1 <> '-1')
+   {
+     if ($query == 'YEAR'){
+
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+   ->where('GENERS','LIKE',"%$query2%")
+   ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
+   ->orderBy('YEAR','desc')
+    ->get();
+ }
+
+if ($query == 'Alphabetical'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+               ->where('GENERS','LIKE',"%$query2%")
+               ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
+               ->orderBy('TITLE','asc')
+               ->get();
+}
+
+  if ($query == 'Oldest'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+                ->where('GENERS','LIKE',"%$query2%")
+                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
+                ->orderBy('ID','desc')
+               ->get();
+}
+if ($query == 'Latest'){
+ $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+               ->where('GENERS','LIKE',"%$query2%")
+               ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
+               ->orderBy('ID','asc')
                 ->get();
+}
+  return response()->json (['status'=>'success',
+                            'data'=>$order
+                          ]);
+           }
+
+
+    else{
+      if ($query == 'YEAR'){
+
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','GENERS','ID')
+   ->where('GENERS','LIKE',"%$query2%")
+   ->orderBy('YEAR','desc')
+    ->get();
+ }
+
+if ($query == 'Alphabetical'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+                ->where('GENERS','LIKE',"%$query2%")
+                ->orderBy('TITLE','asc')
+                 ->get();
+}
+
+  if ($query == 'Oldest'){
+  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
+                ->where('GENERS','LIKE',"%$query2%")
+                ->orderBy('created_at','desc')
+                 ->get();
 }
 if ($query == 'Latest'){
  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')

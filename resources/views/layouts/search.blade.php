@@ -74,43 +74,64 @@
     </div>
 <div class="mvs" style="position:absolute;top:250px">
 </div>
+<div id="nav-links">
+</div>
 <script>
 $(document).ready(function(){
-
-  $.ajax({
-    type: "GET",
-      url: '/api/orderby?t=YEAR&r=-1&g=|',
-    data:{},
+  function get_movies(page) {
+    $.ajax({
+      type: "GET",
+      url: '/api/orderby2?t=YEAR&r=-1&g=|&page=' + page,
+      data:{},
       dataType: "json",
       error: function (request, error) {
-  alert(error);
-  alert(request);
-    },
+          alert(error);
+          alert(request);
+      },
       success: function(result){
         $('.mvs').html("");
+        console.log(result);
+        result['data']['data'].forEach(function(elem) {
+          if (elem['IMAGEPATH']==""){
+            elem['IMAGEPATH']='marina.jpg';
+          }
+          var x = `
+          <div class="col-md-3" style="height:350px" >
+          <a href="/movie/`+elem['ID']+`"><img class="img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+            <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+            <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
+            </div>`;
 
-        result['data'].forEach(function(elem) {
-          if (elem['IMAGEPATH']=="")
-              { elem['IMAGEPATH']='marina.jpg'; }
-
-        var x = `
-        <div class="col-md-3" style="height:350px" >
-        <a href="/movie/`+elem['ID']+`"><img class="img-responsive" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
-          <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
-          <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
-          </div>
-            `;
-
-  $('.mvs').append(x);
-
+          $('.mvs').append(x);
+        });
+        next_page_url = result['data']['next_page_url'];
+        previous_page_url = result['data']['prev_page_url'];
+        console.log(previous_page_url);
+        console.log(next_page_url);
+        $("#nav-links").html("");
+        if(previous_page_url){
+          var x = "<button class='btn btn-primary' id='left-btn' >Previous</button>"
+          $("#nav-links").append(x);
+          $("#left-btn").click(function() {
+            get_movies(result['data']['current_page'] - 1);
+          });
+        }
+        if(next_page_url) {
+          var x = "<button class='btn btn-primary' id='right-btn'>Next</button>"
+          $("#nav-links").append(x);
+          $("#right-btn").click(function() {
+            get_movies(result['data']['current_page'] + 1);
+          });
+        }
+    }
   });
-  }
-  });
+}
+  get_movies(1);
 
 $('.mybtn').on('click',function(){
 $.ajax({
   type: "GET",
-    url: '/api/orderby?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val(),
+    url: '/api/orderby2?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val(),
   data:{},
     dataType: "json",
     error: function (request, error) {
@@ -120,13 +141,13 @@ alert(request);
     success: function(result){
       $('.mvs').html("");
 
-      result['data'].forEach(function(elem) {
+      result['data']['data'].forEach(function(elem) {
         if (elem['IMAGEPATH']=="")
             { elem['IMAGEPATH']='marina.jpg'; }
 
       var x = `
       <div class="col-md-3" style="height:350px" >
-      <a href="/movie/`+elem['ID']+`"><img class="img-responsive" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+      <a href="/movie/`+elem['ID']+`"><img class="img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
         <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
         <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
         </div>

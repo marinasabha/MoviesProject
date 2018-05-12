@@ -9,7 +9,7 @@
     $director = DB::table('movies')->select ('TITLE', 'YEAR','DIRECTOR','IMAGEPATH','ID')
        ->where('DIRECTOR',$term)
          ->orderBy('YEAR','desc')
-         ->get();
+         ->paginate(12);
          return array('data' => $director);
        }
 }

@@ -30,10 +30,12 @@ Route::get('/', function () {
 });
 
 
+
 Route::get('/posters',function (){
   return view ('posters');
 
 });
+Route::post('/insertRatee', 'MovieeController@insertRatee');
 Route::post('/insertRat', 'MovieeController@insertRate');
 Route::get('/director/{term}', 'DirectorController@director');
 Route::get('/actor/{term}', 'ActorController@actor');

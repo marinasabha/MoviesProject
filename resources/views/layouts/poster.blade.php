@@ -27,9 +27,9 @@
     <div class="row">
       <div class="col-md-3">
  @if($order[0]->IMAGEPATH == "")
-  <img src="/storage/posters/marina.jpg" style="width:250px;height:350px" alt="default movie image" />
+  <img class="img-thumbnail" src="/storage/posters/marina.jpg" style="width:250px;height:350px" alt="default movie image" />
 @else
-  <img class="img-responsive" style="width:250px;height:350px" src="/storage/posters/{{ $order[0]->IMAGEPATH }}" />
+  <img class="img-thumbnail" style="width:250px;height:350px" src="/storage/posters/{{ $order[0]->IMAGEPATH }}" />
 @endif
 </div>
   <div class="col-md-3">

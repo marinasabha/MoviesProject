@@ -28,4 +28,24 @@ class MovieeController extends Controller
          'status'=>'success',]);
 
 }
+public function insertRatee(Request $request){
+  $collection = new Collection ();
+  $collection->user_id = Auth::user()->id;
+  $collection->movie_id =$request->input("movie_id");
+   $data=DB::table('collections')->where(
+                ['user_id'=>Auth::user()->id,
+                 'movie_id'=>$request->movie_id
+                 ])->get();
+  if(count($data) == 0){
+      $collection->RATING=$request->input("RATING");
+      $collection ->save();
+    }
+    return response()->json([
+      'status'=>'success',
+      'data'=>$collection,
+
+    ]);
+
+     }
+
 }
