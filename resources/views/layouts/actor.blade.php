@@ -10,6 +10,7 @@
           @else
             <a href="/movie/{{ $actor->ID }}">  <img class="img-movie img-thumbnail img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $actor->IMAGEPATH }}" /> </a>
           @endif
+          <p>&nbsp</p>
         <p>{{ $actor->TITLE }}</p>
           <p>{{ $actor->YEAR }}</p>
 

@@ -92,6 +92,7 @@ $(document).ready(function(){
           var x = `
           <div class="col-md-3" style="height:350px" >
           <a href="/movie/`+elem['ID']+`"><img class="img-movie img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+          <p>&nbsp</p>
             <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
             <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
             </div>`;
@@ -144,6 +145,7 @@ $(document).ready(function(){
           var x = `
             <div class="col-md-3" style="height:350px" >
             <a href="/movie/`+elem['ID']+`"><img class="img-movie img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+            <p>&nbsp</p>
             <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
             <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
             </div>`;

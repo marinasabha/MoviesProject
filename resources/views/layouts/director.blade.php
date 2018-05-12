@@ -10,6 +10,7 @@
           @else
             <a href="/movie/{{ $direct->ID }}">  <img class=" img-movie img-thumbnail img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $direct->IMAGEPATH }}" /> </a>
           @endif
+          <p>&nbsp</p>
         <p>{{ $direct->TITLE }}</p>
           <p>{{ $direct->YEAR }}</p>
 
