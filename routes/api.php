@@ -198,7 +198,7 @@ if ($query == 'Latest'){
  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                ->where('GENERS','LIKE',"%$query2%")
                ->orderBy('created_at','asc')
-               ->get();
+               ->paginate(12);
 }
 }
   return response()->json (['status'=>'success',

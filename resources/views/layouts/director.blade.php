@@ -12,12 +12,15 @@
           @endif
         <p>{{ $direct->TITLE }}</p>
           <p>{{ $direct->YEAR }}</p>
-        
+
 
         </div>
         </div>
 @endforeach
       </div>
+    </div>
+    <div>
+      {{ $director->links() }}
     </div>
 
 @endsection

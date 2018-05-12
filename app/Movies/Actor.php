@@ -9,8 +9,8 @@
          ->where('ACTOR_1',$term)
          ->orWhere('ACTOR_2',$term)
          ->orWhere('ACTOR_3',$term)
-           ->orderBy('YEAR','desc')
-           ->get();
+         ->orderBy('YEAR','desc')
+         ->paginate(12);
              return array('data' => $actors);
            }
          }

@@ -13,19 +13,6 @@ index 0ab4110..31711a5 100644
               return array('data' => $actors);
             }
           }
-diff --git a/app/Movies/Director.php b/app/Movies/Director.php
-index 94cd315..98c0e7b 100644
---- a/app/Movies/Director.php
-+++ b/app/Movies/Director.php
-@@ -9,7 +9,7 @@
-     $director = DB::table('movies')->select ('TITLE', 'YEAR','DIRECTOR','IMAGEPATH','ID')
-        ->where('DIRECTOR',$term)
-          ->orderBy('YEAR','desc')
--         ->get();
-+         ->paginate(12);
-          return array('data' => $director);
-        }
- }
 diff --git a/resources/views/layouts/actor.blade.php b/resources/views/layouts/actor.blade.php
 index 52db195..bb486b6 100644
 --- a/resources/views/layouts/actor.blade.php
@@ -40,7 +27,7 @@ index 52db195..bb486b6 100644
  
  @endsection
 diff --git a/resources/views/layouts/app.blade.php b/resources/views/layouts/app.blade.php
-index 2aff56f..d119b1c 100644
+index ce7c294..3d6d698 100644
 --- a/resources/views/layouts/app.blade.php
 +++ b/resources/views/layouts/app.blade.php
 @@ -12,6 +12,7 @@
@@ -51,7 +38,7 @@ index 2aff56f..d119b1c 100644
  
  <!-- jQuery library -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-@@ -71,7 +72,11 @@
+@@ -72,7 +73,11 @@
  .leave-rating input[type="radio"]:checked ~ label {
      color: #ffc600;
  }
@@ -64,7 +51,7 @@ index 2aff56f..d119b1c 100644
  </head>
  <body>
  
-@@ -185,8 +190,9 @@
+@@ -186,8 +191,9 @@
          </nav>
  
  
@@ -114,10 +101,10 @@ index cfcccd9..b7d9a35 100644
  <p>{{ $movie->TITLE }}</p>
    <p>{{ $movie->YEAR }}</p>
 diff --git a/resources/views/layouts/search.blade.php b/resources/views/layouts/search.blade.php
-index 0af1f57..a7805c2 100644
+index 4b24eda..74e5720 100644
 --- a/resources/views/layouts/search.blade.php
 +++ b/resources/views/layouts/search.blade.php
-@@ -2,142 +2,178 @@
+@@ -2,77 +2,72 @@
  @section('content')
  </div>
  <div class="row">
@@ -257,91 +244,90 @@ index 0af1f57..a7805c2 100644
 -<div class="mvs" style="position:absolute;top:250px">
 +<div id="nav-links">
  </div>
- <script>
- $(document).ready(function(){
-+  function get_movies(page) {
-+    $.ajax({
-+      type: "GET",
-+      url: '/api/orderby?t=YEAR&r=-1&g=|&page=' + page,
-+      data:{},
-+      dataType: "json",
-+      error: function (request, error) {
-+          alert(error);
-+          alert(request);
-+      },
-+      success: function(result){
-+        $('.mvs').html("");
-+        result['data']['data'].forEach(function(elem) {
-+          if (elem['IMAGEPATH']==""){
-+            elem['IMAGEPATH']='marina.jpg';
-+          }
-+          var x = `
-+          <div class="col-md-3" style="height:350px" >
-+          <a href="/movie/`+elem['ID']+`"><img class="img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
-+            <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
-+            <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
-+            </div>`;
+ <div id="nav-links">
+ </div>
+@@ -90,7 +85,6 @@ $(document).ready(function(){
+       },
+       success: function(result){
+         $('.mvs').html("");
+-        console.log(result);
+         result['data']['data'].forEach(function(elem) {
+           if (elem['IMAGEPATH']==""){
+             elem['IMAGEPATH']='marina.jpg';
+@@ -106,59 +100,82 @@ $(document).ready(function(){
+         });
+         next_page_url = result['data']['next_page_url'];
+         previous_page_url = result['data']['prev_page_url'];
+-        console.log(previous_page_url);
+-        console.log(next_page_url);
+         $("#nav-links").html("");
 +
-+          $('.mvs').append(x);
-+        });
-+        next_page_url = result['data']['next_page_url'];
-+        previous_page_url = result['data']['prev_page_url'];
-+        $("#nav-links").html("");
- 
--  $.ajax({
--    type: "GET",
--      url: '/api/orderby?t=YEAR&r=-1&g=|',
--    data:{},
-+        if(previous_page_url){
+         if(previous_page_url){
+-          var x = "<button class='btn btn-primary' id='left-btn' >Previous</button>"
 +          var x = "<button style='margin-right: 5px;' class='btn btn-primary' id='left-btn'>Previous</button>"
-+          $("#nav-links").append(x);
-+          $("#left-btn").click(function() {
-+            get_movies(result['data']['current_page'] - 1);
-+          });
-+        }
+           $("#nav-links").append(x);
+           $("#left-btn").click(function() {
+             get_movies(result['data']['current_page'] - 1);
+           });
+         }
 +        var x = result["data"]['current_page'] + "/" + result["data"]["last_page"];
 +        $("#nav-links").append(x);
-+        if(next_page_url) {
+         if(next_page_url) {
+-          var x = "<button class='btn btn-primary' id='right-btn'>Next</button>"
 +          var x = "<button style='margin-left: 5px;' class='btn btn-primary' id='right-btn'>Next</button>"
-+          $("#nav-links").append(x);
-+          $("#right-btn").click(function() {
-+            get_movies(result['data']['current_page'] + 1);
-+          });
-+        }
-+    }
+           $("#nav-links").append(x);
+           $("#right-btn").click(function() {
+             get_movies(result['data']['current_page'] + 1);
+           });
+         }
+     }
+-  });
+-}
 +    });
 +  }
-+  get_movies(1);
+   get_movies(1);
 +  function get_movies_filter(page) {
 +    $.ajax({
 +      type: "GET",
-+      url: '/api/orderby?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val() + "&page=" + page,
++      url: '/api/orderby2?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val() + "&page=" + page,
 +      data:{},
-       dataType: "json",
-       error: function (request, error) {
--  alert(error);
--  alert(request);
--    },
++      dataType: "json",
++      error: function (request, error) {
 +        alert(error);
 +        alert(request);
 +      },
-       success: function(result){
-         $('.mvs').html("");
++      success: function(result){
++        $('.mvs').html("");
 +        $("#nav-links").html("");
 +        console.log(result);
  
--        result['data'].forEach(function(elem) {
+-$('.mybtn').on('click',function(){
+-$.ajax({
+-  type: "GET",
+-    url: '/api/orderby2?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val(),
+-  data:{},
+-    dataType: "json",
+-    error: function (request, error) {
+-alert(error);
+-alert(request);
+-  },
+-    success: function(result){
+-      $('.mvs').html("");
+-
+-      result['data']['data'].forEach(function(elem) {
+-        if (elem['IMAGEPATH']=="")
+-            { elem['IMAGEPATH']='marina.jpg'; }
 +        result['data']['data'].forEach(function(elem) {
-           if (elem['IMAGEPATH']=="")
-               { elem['IMAGEPATH']='marina.jpg'; }
++          if (elem['IMAGEPATH']=="")
++              { elem['IMAGEPATH']='marina.jpg'; }
  
--        var x = `
--        <div class="col-md-3" style="height:350px" >
--        <a href="/movie/`+elem['ID']+`"><img class="img-responsive" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
--          <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
--          <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
--          </div>
--            `;
+-      var x = `
+-      <div class="col-md-3" style="height:350px" >
+-      <a href="/movie/`+elem['ID']+`"><img class="img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+-        <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+-        <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
+-        </div>
+-          `;
 +          var x = `
 +            <div class="col-md-3" style="height:350px" >
 +            <a href="/movie/`+elem['ID']+`"><img class="img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
@@ -349,13 +335,16 @@ index 0af1f57..a7805c2 100644
 +            <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
 +            </div>`;
  
--  $('.mvs').append(x);
+-$('.mvs').append(x);
 +          $('.mvs').append(x);
 +          next_page_url = result['data']['next_page_url'];
 +          previous_page_url = result['data']['prev_page_url'];
 +          $("#nav-links").html("");
  
--  });
+-});
+-}
+-});
+-});
 +          if(previous_page_url){
 +            var x = "<button style='margin-right: 5px;' class='btn btn-primary' id='left-btn'>Previous</button>"
 +            $("#nav-links").append(x);
@@ -375,110 +364,18 @@ index 0af1f57..a7805c2 100644
 +        });
 +      }
 +      });
-   }
++  }
 +  $('#search').click(function() {
 +    get_movies_filter(1);
-   });
--
--$('.mybtn').on('click',function(){
--$.ajax({
--  type: "GET",
--    url: '/api/orderby?t=' + $('#id3').val() + '&r=' + $('#id2').val() + '&g=' + $('#id1').val(),
--  data:{},
--    dataType: "json",
--    error: function (request, error) {
--alert(error);
--alert(request);
--  },
--    success: function(result){
--      $('.mvs').html("");
--
--      result['data'].forEach(function(elem) {
--        if (elem['IMAGEPATH']=="")
--            { elem['IMAGEPATH']='marina.jpg'; }
--
--      var x = `
--      <div class="col-md-3" style="height:350px" >
--      <a href="/movie/`+elem['ID']+`"><img class="img-responsive" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
--        <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
--        <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
--        </div>
--          `;
--
--$('.mvs').append(x);
--
--});
--}
--});
--});
++  });
  });
  
  </script>
 diff --git a/routes/api.php b/routes/api.php
-index 1780756..b4c865e 100644
+index 2f53e45..d7495c4 100644
 --- a/routes/api.php
 +++ b/routes/api.php
-@@ -61,15 +61,15 @@ Route::get('/orderby',function(Request $request){
-    ->where('GENERS','LIKE',"%$query2%")
-    ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
-    ->orderBy('YEAR','desc')
--   ->get();
-+   ->paginate(12);
-  }
- 
- if ($query == 'Alphabetical'){
-   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
-                ->where('GENERS','LIKE',"%$query2%")
-                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
--                ->orderBy('TITLE','asc')
--              ->get();
-+               ->orderBy('TITLE','asc')
-+               ->paginate(12);
- }
- 
-   if ($query == 'Oldest'){
-@@ -77,14 +77,14 @@ if ($query == 'Alphabetical'){
-                 ->where('GENERS','LIKE',"%$query2%")
-                 ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
-                 ->orderBy('ID','desc')
--                ->get();
-+                ->paginate(12);
- }
- if ($query == 'Latest'){
-  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
-                ->where('GENERS','LIKE',"%$query2%")
-                ->whereRaw('FLOOR(IMDB_SCORE) = ?',[$query1])
-                ->orderBy('ID','asc')
--               ->get();
-+               ->paginate(12);
- }
-   return response()->json (['status'=>'success',
-                             'data'=>$order
-@@ -98,27 +98,27 @@ if ($query == 'Latest'){
-   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','GENERS','ID')
-    ->where('GENERS','LIKE',"%$query2%")
-    ->orderBy('YEAR','desc')
--   ->get();
-+   ->paginate(12);
-  }
- 
- if ($query == 'Alphabetical'){
-   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
--               ->where('GENERS','LIKE',"%$query2%")
-+                ->where('GENERS','LIKE',"%$query2%")
-                 ->orderBy('TITLE','asc')
--                  ->get();
-+                ->paginate(12);
- }
- 
-   if ($query == 'Oldest'){
-   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
-                 ->where('GENERS','LIKE',"%$query2%")
-                 ->orderBy('created_at','desc')
--                ->get();
-+                ->paginate(12);
- }
- if ($query == 'Latest'){
+@@ -198,7 +198,7 @@ if ($query == 'Latest'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                 ->where('GENERS','LIKE',"%$query2%")
                 ->orderBy('created_at','asc')

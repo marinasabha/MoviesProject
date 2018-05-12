@@ -18,5 +18,8 @@
 @endforeach
       </div>
     </div>
+    <div>
+      {{ $actors->links() }}
+    </div>
 
 @endsection
