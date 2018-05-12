@@ -27,16 +27,16 @@
     <div class="row">
       <div class="col-md-3">
  @if($order[0]->IMAGEPATH == "")
-  <img class="img-thumbnail" src="/storage/posters/marina.jpg" style="width:250px;height:350px" alt="default movie image" />
+  <img class=" img-movie img-thumbnail" src="/storage/posters/marina.jpg" style="width:250px;height:350px" alt="default movie image" />
 @else
-  <img class="img-thumbnail" style="width:250px;height:350px" src="/storage/posters/{{ $order[0]->IMAGEPATH }}" />
+  <img class=" img-movie img-thumbnail" style="width:250px;height:350px" src="/storage/posters/{{ $order[0]->IMAGEPATH }}" />
 @endif
 </div>
   <div class="col-md-3">
 <p> <strong>{{ $order[0]->TITLE }}</strong></p>
 <p style="color:gray">{{ $order[0]->YEAR }}</p>
  <p style="color:gray">{{ $order[0]->GENERS }}</p>
-<strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}" target="_blank">   <img src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a>
+<strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}" target="_blank">   <img class="img-movie" src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a>
 <p> {{ $order[0]->DESCRIBTION }}</p>
 
 

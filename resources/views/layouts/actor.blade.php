@@ -6,9 +6,9 @@
         <div class="movie">
           <div class="col-md-3">
           @if($actor->IMAGEPATH == "")
-            <a href="/movie/{{ $actor->ID }}">  <img src="/storage/posters/marina.jpg" style="width:170px;height:250px" alt="default movie image" /> </a>
+            <a href="/movie/{{ $actor->ID }}">  <img class="img-movie img-thumbnail" src="/storage/posters/marina.jpg" style="width:170px;height:250px" alt="default movie image" /> </a>
           @else
-            <a href="/movie/{{ $actor->ID }}">  <img class="img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $actor->IMAGEPATH }}" /> </a>
+            <a href="/movie/{{ $actor->ID }}">  <img class="img-movie img-thumbnail img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $actor->IMAGEPATH }}" /> </a>
           @endif
         <p>{{ $actor->TITLE }}</p>
           <p>{{ $actor->YEAR }}</p>
@@ -17,9 +17,6 @@
         </div>
 @endforeach
       </div>
-    </div>
-    <div>
-      {{ $actors->links() }}
     </div>
 
 @endsection

@@ -12,7 +12,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,6 +41,12 @@
 
 }
 
+.mvs {
+  margin-top:50px;
+}
+.img-movie:hover {
+  transform: scale(1.1);
+ }
 
 .drop_menu {
  display: inline-block;
@@ -73,11 +78,7 @@
 .leave-rating input[type="radio"]:checked ~ label {
     color: #ffc600;
 }
-
-.mvs {
-  margin-top: 5px;
-}
-</style>
+    </style>
 </head>
 <body>
 
@@ -191,9 +192,8 @@
         </nav>
 
 
-        <div class="container">
-          @yield('content')
-        </div>
+
+        @yield('content')
 
 </body>
 </html>
