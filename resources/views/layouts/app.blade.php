@@ -119,7 +119,7 @@
 
                       </div>
                     </li>
-                    <li> <a href="" id="search-btn">quicksearch</a></li>
+                    <li> <a href="" id="search-btn">Quick search</a></li>
 
                     <script>
                     function formatData (data) {
@@ -184,14 +184,14 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li> <a href="" id="suggestions">Suggestions</a></li>
+                            <button id="suggestions" style="padding:11px;width:100px;height:50px"  class="btn btn-primary">Suggestions</button>
+
                         @endguest
                     </ul>
                 </div>
+
             </div>
         </nav>
-
-
 
         @yield('content')
 

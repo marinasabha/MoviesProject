@@ -20,6 +20,28 @@ Route::get('/test', function () {
     return view('test');
 
 });
+Route::get('/recomender',function(){
+  $recomender = DB::table('recomendations')->select('RECOMENDER')
+    ->where('user_id', Auth::user()->id)->get();
+    if(count($recomender) >0) {
+    $rec = str_replace('"', "", $recomender[0]->RECOMENDER);
+    $arr = explode(',', $rec);
+
+
+    $rec = DB::table('movies')
+                      ->whereIn('ID',$arr)
+                      ->paginate(20);
+                    }
+    else {
+      $rec = DB::table('movies')
+                        ->orderBy('YEAR','desc')
+                        ->paginate(20);
+
+    }
+                      return response()->json([
+                        'data'=>$rec
+                      ]);
+                    });
 Route::get('/kenda', function () {
     return view('student.kenda');
 

@@ -80,8 +80,7 @@ $(document).ready(function(){
       data:{},
       dataType: "json",
       error: function (request, error) {
-          alert(error);
-          alert(request);
+
       },
       success: function(result){
         $('.mvs').html("");
@@ -178,7 +177,65 @@ $(document).ready(function(){
   $('#search').click(function() {
     get_movies_filter(1);
   });
-});
+
+      function get_movies_filter(page) {
+          $.ajax({
+            type: "GET",
+            url: '/recomender',
+            data:{},
+            dataType: "json",
+            error: function (request, error) {
+
+            },
+            success: function(result){
+              $('.mvs').html("");
+              $("#nav-links").html("");
+
+
+              result['data']['data'].forEach(function(elem) {
+                if (elem['IMAGEPATH']=="")
+                    { elem['IMAGEPATH']='marina.jpg'; }
+
+                var x = `
+                  <div class="col-md-3" style="height:350px" >
+                  <a href="/movie/`+elem['ID']+`"><img class="img-movie img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
+                  <p>&nbsp</p>
+                  <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+                  <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
+                  </div>`;
+
+                $('.mvs').append(x);
+                next_page_url = result['data']['next_page_url'];
+                previous_page_url = result['data']['prev_page_url'];
+                $("#nav-links").html("");
+
+                if(previous_page_url){
+                  var x = "<button style='margin-right: 5px;' class='btn btn-primary' id='left-btn'>Previous</button>"
+                  $("#nav-links").append(x);
+                  $("#left-btn").click(function() {
+                    get_movies_filter(result['data']['current_page'] - 1);
+                  });
+                }
+                var x = result["data"]['current_page'] + "/" + result["data"]["last_page"];
+                $("#nav-links").append(x);
+                if(next_page_url) {
+                  var x = "<button style='margin-left: 5px;' class='btn btn-primary' id='right-btn'>Next</button>"
+                  $("#nav-links").append(x);
+                  $("#right-btn").click(function() {
+                    get_movies_filter(result['data']['current_page'] + 1);
+                  });
+                }
+              });
+            }
+            });
+        }
+        $('#suggestions').click(function() {
+          get_movies_filter(1);
+        });
+      });
+
+
+
 
 </script>
 @endsection

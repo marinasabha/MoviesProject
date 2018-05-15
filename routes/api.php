@@ -259,7 +259,7 @@ Route::get('/recomender',function(){
                     }
     else {
       $rec = DB::table('movies')
-                        ->whereIn('ID',['1','2','3','4','5','6','7','8','9','10'])
+                        ->orderBy('YEAR','desc')
                         ->get();
 
     }
