@@ -177,7 +177,8 @@ $(document).ready(function(){
   $('#search').click(function() {
     get_movies_filter(1);
   });
-
+});
+ $(document).ready(function(){
       function get_movies_filter(page) {
           $.ajax({
             type: "GET",
