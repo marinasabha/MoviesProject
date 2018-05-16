@@ -4,7 +4,7 @@
     <div class="container-fluid row">
       @foreach($director as $direct)
         <div class="movie">
-          <div class="col-md-3">
+          <div class="col-md-3" style="height:350px">
           @if($direct->IMAGEPATH == "")
             <a href="/movie/{{ $direct->ID }}">  <img class="img-movie img-thumbnail" src="/storage/posters/marina.jpg" style="width:170px;height:250px" alt="default movie image" /> </a>
           @else

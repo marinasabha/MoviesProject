@@ -20,6 +20,7 @@ Route::get('/test', function () {
     return view('test');
 
 });
+/*
 Route::get('/recomender',function(){
   $recomender = DB::table('recomendations')->select('RECOMENDER')
     ->where('user_id', Auth::user()->id)->get();
@@ -41,7 +42,7 @@ Route::get('/recomender',function(){
                       return response()->json([
                         'data'=>$rec
                       ]);
-                    });
+                    }); */
 Route::get('/kenda', function () {
     return view('student.kenda');
 
@@ -57,6 +58,7 @@ Route::get('/posters',function (){
   return view ('posters');
 
 });
+Route::get('/recomender','MovieeController@recomender1');
 Route::post('/insertRatee', 'MovieeController@insertRatee');
 Route::post('/insertRat', 'MovieeController@insertRate');
 Route::get('/director/{term}', 'DirectorController@director');

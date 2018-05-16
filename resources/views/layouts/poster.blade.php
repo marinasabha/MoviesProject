@@ -30,8 +30,8 @@
 </div>
   <div class="col-md-3">
 <p style="color:white" > <strong>{{ $order[0]->TITLE }}</strong></p>
-<p style="color:red">{{ $order[0]->YEAR }}</p>
- <p style="color:hsl(0, 60%, 50%)">{{ $order[0]->GENERS }}</p>
+<p style="color:#3cb371">{{ $order[0]->YEAR }}</p>
+ <p style="color:hsl(0, 100%, 25%)">{{ $order[0]->GENERS }}</p>
  <p style="color:white"><strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}" target="_blank">   <img class="img-movie" src="/storage/posters/imdb.jpg" style="width:20px;height:20px" alt="imdb image" /> </a> </p>
 <p> {{ $order[0]->DESCRIBTION }}</p>
 
@@ -94,11 +94,11 @@
 
 
 <p style="color:white" > <strong> Director : </strong><a href="/director/{{ $order[0]->DIRECTOR }}"> </p>
- <p style="color:black" class="img-movie" >{{ $order[0]->DIRECTOR }}</p> </a>
+ <p style="color:#3cb371" class="img-movie" >{{ $order[0]->DIRECTOR }}</p> </a>
 <div style="color:white">
   <strong> Actors : </strong>
-<a  href="/actor/{{ $order[0]->ACTOR_1 }}"><p class="img-movie" style="color:red"> {{ $order[0]->ACTOR_1 }}</p> </a>
-<a  href="/actor/{{ $order[0]->ACTOR_2 }}"> <p class="img-movie"  style="color:rgb(255, 99, 71)">{{ $order[0]->ACTOR_2 }}</p> </a>
+<a  href="/actor/{{ $order[0]->ACTOR_1 }}"><p class="img-movie" style="color:hsl(0, 100%, 25%)"> {{ $order[0]->ACTOR_1 }}</p> </a>
+<a  href="/actor/{{ $order[0]->ACTOR_2 }}"> <p class="img-movie"  style="color:#3cb371">{{ $order[0]->ACTOR_2 }}</p> </a>
 <a  href="/actor/{{ $order[0]->ACTOR_3 }}"> <p class="img-movie" style="color:black"> {{ $order[0]->ACTOR_3 }}</p> </a>
 </div>
 </div>

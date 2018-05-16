@@ -129,8 +129,7 @@ $(document).ready(function(){
       data:{},
       dataType: "json",
       error: function (request, error) {
-        alert(error);
-        alert(request);
+
       },
       success: function(result){
         $('.mvs').html("");
@@ -178,7 +177,7 @@ $(document).ready(function(){
     get_movies_filter(1);
   });
 });
- $(document).ready(function(){
+  /*$(document).ready(function(){
       function get_movies_filter(page) {
           $.ajax({
             type: "GET",
@@ -235,7 +234,7 @@ $(document).ready(function(){
         });
       });
 
-
+*/
 
 
 </script>

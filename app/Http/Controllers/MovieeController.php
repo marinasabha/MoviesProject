@@ -14,6 +14,10 @@ class MovieeController extends Controller
     $result = Moviee::poster($ID);
     return view('layouts.poster', ['order' => $result["data"]]);
   }
+  public function recomender1(){
+    $result=Moviee::recomender();
+    return view('layouts.recomendations',['rec'=>$result["data"]]);
+  }
   public function insertRate(Request $request){
     $collection = Collection::firstOrNew(['user_id'=> auth()->id(),
                      'movie_id'=>$request->movie_id
