@@ -21,6 +21,7 @@ $recomender = DB::table('recomendations')->select('RECOMENDER')
 
   $rec = DB::table('movies')
                     ->whereIn('ID',$arr)
+                    
                     ->paginate(12);
                   }
   else {

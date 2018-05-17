@@ -251,10 +251,12 @@ Route::get('/recomender',function(){
     if(count($recomender) >0) {
     $rec = str_replace('"', "", $recomender[0]->RECOMENDER);
     $arr = explode(',', $rec);
+    $s = $recomender[0]->RECOMENDER;
 
 
     $rec = DB::table('movies')
                       ->whereIn('ID',$arr)
+                      ->orderByRaw("field(id,${s})")
                       ->get();
                     }
     else {
