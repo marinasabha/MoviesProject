@@ -12,24 +12,25 @@ class Moviee{
   }
 
 public static function recomender(){
-$recomender = DB::table('recomendations')->select('RECOMENDER')
-  ->where('user_id', Auth::user()->id)->get();
-  if(count($recomender) >0) {
-  $rec = str_replace('"', "", $recomender[0]->RECOMENDER);
-  $arr = explode(',', $rec);
+  $recomender = DB::table('recomendations')->select('RECOMENDER')
+    ->where('user_id', Auth::user()->id)->get();
+    if(count($recomender) >0) {
+    $rec = str_replace('"', "", $recomender[0]->RECOMENDER);
+    $arr = explode(',', $rec);
+    $s = $recomender[0]->RECOMENDER;
 
 
-  $rec = DB::table('movies')
-                    ->whereIn('ID',$arr)
-                    
-                    ->paginate(12);
-                  }
-  else {
     $rec = DB::table('movies')
-                      ->orderBy('YEAR','desc')
+                      ->whereIn('ID',$arr)
+                      ->orderByRaw("field(id,${s})")
                       ->paginate(12);
+                    }
+    else {
+      $rec = DB::table('movies')
+                        ->orderBy('YEAR','desc')
+                        ->paginate(12);
 
-  }
+    }
                     return array('data'=> $rec);
                   }
                 }
