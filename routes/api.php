@@ -262,6 +262,7 @@ Route::get('/recomender',function(){
     else {
       $rec = DB::table('movies')
                         ->orderBy('YEAR','desc')
+                        ->limit(20)
                         ->get();
 
     }

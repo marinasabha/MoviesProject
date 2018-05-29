@@ -23,12 +23,14 @@ public static function recomender(){
     $rec = DB::table('movies')
                       ->whereIn('ID',$arr)
                       ->orderByRaw("field(id,${s})")
-                      ->paginate(12);
+                      ->limit(20)
+                      ->get();
                     }
     else {
       $rec = DB::table('movies')
                         ->orderBy('YEAR','desc')
-                        ->paginate(12);
+                        ->limit(20)
+                        ->get();
 
     }
                     return array('data'=> $rec);

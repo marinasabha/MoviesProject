@@ -21,7 +21,7 @@
       </div>
     </div>
     <div>
-      {{ $rec->links() }}
+
     </div>
 
 @endsection
