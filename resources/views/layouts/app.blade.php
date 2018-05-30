@@ -27,7 +27,7 @@
 
     <style>
     html,body {
-      background-image:url('/storage/posters/ma9.png');
+      background-image:url('/storage/posters/ma9.jpg');
       background-repeat:no-repeat;
       background-attachment:fixed;
         Background-size:100%;
