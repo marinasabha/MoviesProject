@@ -11,8 +11,8 @@
             <a href="/movie/{{ $actor->ID }}">  <img class="img-movie img-thumbnail img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $actor->IMAGEPATH }}" /> </a>
           @endif
           <p>&nbsp</p>
-        <p style="height:20px ;color:white;">{{ $actor->TITLE }}</p>
-          <p style="height:20px ;color:white;">{{ $actor->YEAR }}</p>
+        <p style="color:white;">{{ $actor->TITLE }}</p>
+          <p style=color:white;">{{ $actor->YEAR }}</p>
 
         </div>
         </div>

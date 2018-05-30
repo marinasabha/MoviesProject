@@ -11,8 +11,8 @@
             <a href="/movie/{{ $direct->ID }}">  <img class=" img-movie img-thumbnail img-responsive" style="width:170px;height:250px" src="/storage/posters/{{ $direct->IMAGEPATH }}" /> </a>
           @endif
           <p>&nbsp</p>
-        <p style="height:20px ;color:white;">{{ $direct->TITLE }}</p>
-          <p style="height:20px ;color:white;">{{ $direct->YEAR }}</p>
+        <p style="color:white;">{{ $direct->TITLE }}</p>
+          <p style="color:white;">{{ $direct->YEAR }}</p>
 
 
         </div>
