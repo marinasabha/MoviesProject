@@ -27,7 +27,10 @@
 
     <style>
     html,body {
-
+      background-image:url('/storage/posters/ma9.png');
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+        Background-size:100%;
         background-color: #474e5d;
         color: black;
         font-weight: 100;

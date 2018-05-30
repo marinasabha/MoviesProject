@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropWATCHEDFromCollectionsTable extends Migration
+class AddVideoFromMoviesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class DropWATCHEDFromCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::table('collections', function (Blueprint $table) {
-            $table->dropColumn('WATCHED');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->string('Video',100)->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class DropWATCHEDFromCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('collections', function (Blueprint $table) {
-            //
+        Schema::table('movies', function (Blueprint $table) {
+              Schema::dropIfExists('movies');
         });
     }
 }
