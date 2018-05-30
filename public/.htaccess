@@ -24,5 +24,6 @@
       ExpiresActive On
       ExpiresByType text/css "access 1 month"
       ExpiresByType image/jpeg "access 1 month"
+      ExpiresByType image/png "access 1 month"
     </IfModule>
 </IfModule>

@@ -32,7 +32,7 @@
 <p style="color:white;" > <strong>{{ $order[0]->TITLE }}</strong></p>
 <p style="color:#3cb371">{{ $order[0]->YEAR }}</p>
  <p style="color:hsl(0, 100%, 25%)">{{ $order[0]->GENERS }}</p>
- <p style="color:black"><strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}" target="_blank">   <img class="img-movie" src="/storage/posters/imdb.jpg" style="width:30px;height:20px" alt="imdb image" /> </a> </p>
+ <p style="color:white"><strong>IMDB_LINK :</strong> <a href= "{{ $order[0]->IMDB_LINK }}" target="_blank">   <img class="img-movie" src="/storage/posters/imdb.jpg" style="width:30px;height:20px" alt="imdb image" /> </a> </p>
 <p style="color:white"> {{ $order[0]->DESCRIBTION }}</p>
 
 
@@ -93,7 +93,7 @@
 
 
 
-<p style="color:black" > <strong> Director : </strong><a href="/director/{{ $order[0]->DIRECTOR }}"> </p>
+<p style="color:white" > <strong> Director : </strong><a href="/director/{{ $order[0]->DIRECTOR }}"> </p>
  <p style="color:#3cb371" class="img-movie" >{{ $order[0]->DIRECTOR }}</p> </a>
 <div style="color:white">
   <strong> Actors : </strong>

@@ -92,8 +92,8 @@ $(document).ready(function(){
           <div class="col-md-3" style="height:350px" >
           <a href="/movie/`+elem['ID']+`"><img class="img-movie img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
           <p>&nbsp</p>
-            <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
-            <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
+            <p style="height:20px;color:white;"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+            <p style="height:50px;color:white;"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
             </div>`;
 
           $('.mvs').append(x);
@@ -144,8 +144,8 @@ $(document).ready(function(){
             <div class="col-md-3" style="height:350px" >
             <a href="/movie/`+elem['ID']+`"><img class="img-movie img-thumbnail" src="/storage/posters/`+elem['IMAGEPATH']+`"  alt="marina" width="170" height="255"> </a>
             <p>&nbsp</p>
-            <p style="height:20px"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
-            <p style="height:50px"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
+            <p style="height:20px ;color:white;"> <strong>Title : </strong> ` + elem['TITLE'] + `</p>
+            <p style="height:50px ;color:white;"><strong>Year : </strong> ` + elem['YEAR'] + `</p>
             </div>`;
 
           $('.mvs').append(x);
