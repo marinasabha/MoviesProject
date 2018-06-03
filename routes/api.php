@@ -112,13 +112,13 @@ if ($query == 'Alphabetical'){
   if ($query == 'Oldest'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                 ->where('GENERS','LIKE',"%$query2%")
-                ->orderBy('created_at','desc')
+                ->orderBy('ID','desc')
                 ->paginate(12);
 }
 if ($query == 'Latest'){
  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                ->where('GENERS','LIKE',"%$query2%")
-               ->orderBy('created_at','asc')
+               ->orderBy('ID','asc')
                ->paginate(12);
 }
 }
@@ -191,13 +191,13 @@ if ($query == 'Alphabetical'){
   if ($query == 'Oldest'){
   $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                 ->where('GENERS','LIKE',"%$query2%")
-                ->orderBy('created_at','desc')
+                ->orderBy('ID','desc')
                  ->get();
 }
 if ($query == 'Latest'){
  $order = DB::table('movies')->select ('TITLE', 'YEAR','IMAGEPATH','ID')
                ->where('GENERS','LIKE',"%$query2%")
-               ->orderBy('created_at','asc')
+               ->orderBy('ID','asc')
                ->paginate(12);
 }
 }
